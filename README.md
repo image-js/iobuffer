@@ -19,7 +19,7 @@ $ npm install iobuffer
 
 #### setBigEndian() / setLittleEndian()
 
-Set the endianess for multi-byte values.
+Set the endianess for multi-byte values (default is little endian).
 
 #### skip(n)
 
