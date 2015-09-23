@@ -1,6 +1,6 @@
 {
   "name": "iobuffer",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Read and write binary data on ArrayBuffers",
   "main": "src/iobuffer.js",
   "scripts": {
