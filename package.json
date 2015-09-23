@@ -1,0 +1,19 @@
+{
+  "name": "iobuffer",
+  "version": "0.0.0",
+  "description": "Read and write binary data on ArrayBuffers",
+  "main": "src/iobuffer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/targos/random-array-buffer.git"
+  },
+  "author": "Michaël Zasso",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/targos/random-array-buffer/issues"
+  },
+  "homepage": "https://github.com/targos/random-array-buffer#readme"
+}
