@@ -4,44 +4,52 @@ class Buffer {
     constructor() {
         this.buffer = null;
         this.length = 0;
-        this._data = null;
-        this._offset = 0;
+        this.offset = 0;
+        this.littleEndian = true;
         this._mark = 0;
-        this._littleEndian = true;
+        this._data = null;
     }
 
     available(byteLength) {
         if (byteLength === undefined) byteLength = 1;
-        return (this._offset + byteLength) <= this.length;
+        return (this.offset + byteLength) <= this.length;
     }
 
-    setBigEndian() {
-        this._littleEndian = false;
+    isLittleEndian() {
+        return this.littleEndian;
     }
 
     setLittleEndian() {
-        this._littleEndian = true;
+        this.littleEndian = true;
+    }
+
+    isBigEndian() {
+        return !this.littleEndian;
+    }
+
+    setBigEndian() {
+        this.littleEndian = false;
     }
 
     skip(n) {
         if (n === undefined) n = 1;
-        this._offset += n;
+        this.offset += n;
     }
 
     seek(offset) {
-        this._offset = offset;
+        this.offset = offset;
     }
 
     mark() {
-        this._mark = this._offset;
+        this._mark = this.offset;
     }
 
     reset() {
-        this._offset = this._mark;
+        this.offset = this._mark;
     }
 
     rewind() {
-        this._offset = 0;
+        this.offset = 0;
     }
 }
 

@@ -4,7 +4,6 @@ const InputBuffer = require('..').InputBuffer;
 
 describe('InputBuffer class', function () {
     const data = new Uint32Array([0xff00ff00, 0x00ff00ff]);
-    console.log(data);
     let buffer;
     beforeEach(function () {
         buffer = new InputBuffer(data);

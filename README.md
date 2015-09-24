@@ -35,6 +35,18 @@ Returns `true` if there are enough bytes between the current offset and the buff
 
 Set the endianess for multi-byte values (default is little endian).
 
+#### isBigEndian() / isLittleEndian()
+
+Returns a boolean indicating if current endianess matches.
+
+#### littleEndian
+
+`true` if current endianess is little endian, `false` if it is big endian.
+
+#### offset
+
+Value of the current pointer offset.
+
 #### skip(n = 1)
 
 Move the pointer forward by `n` bytes.

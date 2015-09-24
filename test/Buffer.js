@@ -9,7 +9,7 @@ describe('Base Buffer class', function () {
     });
 
     it('should start at 0', function () {
-        buffer._offset.should.equal(0);
+        buffer.offset.should.equal(0);
     });
 
     it('should report availability', function () {
@@ -27,28 +27,33 @@ describe('Base Buffer class', function () {
     });
 
     it('get/set endianess', function () {
-        buffer._littleEndian.should.be.true();
+        buffer.littleEndian.should.be.true();
+        buffer.isLittleEndian().should.be.true();
+        buffer.isBigEndian().should.be.false();
         buffer.setBigEndian();
-        buffer._littleEndian.should.be.false();
+        buffer.littleEndian.should.be.false();
+        buffer.isLittleEndian().should.be.false();
+        buffer.isBigEndian().should.be.true();
         buffer.setLittleEndian();
-        buffer._littleEndian.should.be.true();
+        buffer.littleEndian.should.be.true();
+        buffer.isBigEndian().should.be.false();
     });
 
     it('skip', function () {
         buffer.skip();
-        buffer._offset.should.equal(1);
+        buffer.offset.should.equal(1);
         buffer.skip();
         buffer.skip(1);
-        buffer._offset.should.equal(3);
+        buffer.offset.should.equal(3);
         buffer.skip(5);
-        buffer._offset.should.equal(8);
+        buffer.offset.should.equal(8);
     });
 
     it('seek', function () {
         buffer.seek(0);
-        buffer._offset.should.equal(0);
+        buffer.offset.should.equal(0);
         buffer.seek(12);
-        buffer._offset.should.equal(12);
+        buffer.offset.should.equal(12);
     });
 
     it('mark/reset', function () {
@@ -57,12 +62,12 @@ describe('Base Buffer class', function () {
         buffer.skip(2);
         buffer.seek(3);
         buffer.reset();
-        buffer._offset.should.equal(12);
+        buffer.offset.should.equal(12);
     });
 
     it('rewind', function () {
         buffer.seek(10);
         buffer.rewind();
-        buffer._offset.should.equal(0);
+        buffer.offset.should.equal(0);
     });
 });
