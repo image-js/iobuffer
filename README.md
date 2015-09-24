@@ -21,6 +21,10 @@ $ npm install iobuffer
 
 Reference to the internal `ArrayBuffer` object.
 
+#### length
+
+Byte length of the internal `ArrayBuffer` object.
+
 #### setBigEndian() / setLittleEndian()
 
 Set the endianess for multi-byte values (default is little endian).

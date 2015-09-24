@@ -3,6 +3,7 @@
 class Buffer {
     constructor() {
         this.buffer = null;
+        this.length = 0;
         this._data = null;
         this._offset = 0;
         this._mark = 0;
