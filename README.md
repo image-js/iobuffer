@@ -78,13 +78,14 @@ Move the pointer back to offset `0`.
 Each method returns the value and moves the pointer forward by the number of read bytes.
 
 * readInt8
-* readUint8
+* readUint8 / readByte / readBytes(n)
 * readInt16
 * readUint16
 * readInt32
 * readUint32
 * readFloat32
 * readFloat64
+* readChar / readChars(n)
 
 ## License
 

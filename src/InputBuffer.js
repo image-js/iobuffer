@@ -21,6 +21,19 @@ class InputBuffer extends Buffer {
         return this._data.getUint8(this.offset++);
     }
 
+    readByte() {
+        return this._data.getUint8(this.offset++);
+    }
+
+    readBytes(n) {
+        if (n === undefined) n = 1;
+        var bytes = new Uint8Array(n);
+        for (var i = 0; i < n; i++) {
+            bytes[i] = this.readByte();
+        }
+        return bytes;
+    }
+
     readInt16() {
         var value = this._data.getInt16(this.offset, this.littleEndian);
         this.offset += 2;
@@ -55,6 +68,19 @@ class InputBuffer extends Buffer {
         var value = this._data.getFloat64(this.offset, this.littleEndian);
         this.offset += 8;
         return value;
+    }
+
+    readChar() {
+        return String.fromCharCode(this.readInt8());
+    }
+
+    readChars(n) {
+        if (n === undefined) n = 1;
+        var str = '';
+        for (var i = 0; i < n; i++) {
+            str += this.readChar();
+        }
+        return str;
     }
 }
 

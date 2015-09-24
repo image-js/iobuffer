@@ -34,15 +34,13 @@ describe('InputBuffer class', function () {
         buffer.readInt8().should.equal(0);
     });
 
-    it('readUint8', function () {
+    it('readUint8 / readByte / readBytes', function () {
         buffer.readUint8().should.equal(0);
         buffer.readUint8().should.equal(255);
-        buffer.readUint8().should.equal(0);
-        buffer.readUint8().should.equal(255);
-        buffer.readUint8().should.equal(255);
-        buffer.readUint8().should.equal(0);
-        buffer.readUint8().should.equal(255);
-        buffer.readUint8().should.equal(0);
+        buffer.readByte().should.equal(0);
+        buffer.readByte().should.equal(255);
+        Array.from(buffer.readBytes()).should.eql([255]);
+        Array.from(buffer.readBytes(3)).should.eql([0, 255, 0]);
     });
 
     it('readInt16', function () {
@@ -76,5 +74,13 @@ describe('InputBuffer class', function () {
 
     it('readFloat64', function () {
         buffer.readFloat64().should.approximately(7.06e-304, 0.01e-304);
+    });
+
+    it('readChar(s)', function () {
+        var chars = 'hello'.split('').map(char => char.charCodeAt(0));
+        var buffer = new InputBuffer(new Uint8Array(chars));
+        buffer.readChar().should.equal('h');
+        buffer.readChars().should.equal('e');
+        buffer.readChars(3).should.equal('llo');
     });
 });
