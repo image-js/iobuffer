@@ -17,6 +17,10 @@ $ npm install iobuffer
 
 `InputBuffer` and `OutputBuffer` both inherit from `Buffer` which defines the following interface:
 
+#### buffer
+
+Reference to the internal `ArrayBuffer` object.
+
 #### setBigEndian() / setLittleEndian()
 
 Set the endianess for multi-byte values (default is little endian).

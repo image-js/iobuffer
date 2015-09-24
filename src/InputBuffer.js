@@ -8,6 +8,7 @@ class InputBuffer extends Buffer {
         if (data.buffer) {
             data = data.buffer;
         }
+        this.buffer = data;
         this._data = new DataView(data);
     }
 
