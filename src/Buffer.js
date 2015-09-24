@@ -24,6 +24,7 @@ class Buffer {
     }
 
     skip(n) {
+        if (n === undefined) n = 1;
         this._offset += n;
     }
 

@@ -1,6 +1,8 @@
 # iobuffer
 
   [![NPM version][npm-image]][npm-url]
+  [![build status][travis-image]][travis-url]
+  [![Test coverage][coveralls-image]][coveralls-url]
   [![npm download][download-image]][download-url]
 
 Read and write binary data in ArrayBuffers
@@ -25,7 +27,7 @@ Reference to the internal `ArrayBuffer` object.
 
 Byte length of the internal `ArrayBuffer` object.
 
-#### available(byteLength)
+#### available(byteLength = 1)
 
 Returns `true` if there are enough bytes between the current offset and the buffer's end, false otherwise.
 
@@ -33,7 +35,7 @@ Returns `true` if there are enough bytes between the current offset and the buff
 
 Set the endianess for multi-byte values (default is little endian).
 
-#### skip(n)
+#### skip(n = 1)
 
 Move the pointer forward by `n` bytes.
 
@@ -78,5 +80,9 @@ Each method returns the value and moves the pointer forward by the number of rea
 
 [npm-image]: https://img.shields.io/npm/v/iobuffer.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/iobuffer
+[travis-image]: https://img.shields.io/travis/image-js/iobuffer/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/image-js/iobuffer
+[coveralls-image]: https://img.shields.io/coveralls/image-js/iobuffer.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/github/image-js/iobuffer
 [download-image]: https://img.shields.io/npm/dm/iobuffer.svg?style=flat-square
 [download-url]: https://www.npmjs.com/package/iobuffer
