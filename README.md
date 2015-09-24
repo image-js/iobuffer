@@ -25,6 +25,10 @@ Reference to the internal `ArrayBuffer` object.
 
 Byte length of the internal `ArrayBuffer` object.
 
+#### available(byteLength)
+
+Returns `true` if there are enough bytes between the current offset and the buffer's end, false otherwise.
+
 #### setBigEndian() / setLittleEndian()
 
 Set the endianess for multi-byte values (default is little endian).

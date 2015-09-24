@@ -10,6 +10,11 @@ class Buffer {
         this._littleEndian = true;
     }
 
+    available(byteLength) {
+        if (byteLength === undefined) byteLength = 1;
+        return (this._offset + byteLength) <= this.length;
+    }
+
     setBigEndian() {
         this._littleEndian = false;
     }
