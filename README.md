@@ -77,6 +77,7 @@ Move the pointer back to offset `0`.
 
 Each method returns the value and moves the pointer forward by the number of read bytes.
 
+* readBoolean
 * readInt8
 * readUint8 / readByte / readBytes(n)
 * readInt16

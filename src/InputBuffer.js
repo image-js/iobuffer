@@ -13,6 +13,10 @@ class InputBuffer extends Buffer {
         this._data = new DataView(data);
     }
 
+    readBoolean() {
+        return this.readUint8() !== 0;
+    }
+
     readInt8() {
         return this._data.getInt8(this.offset++);
     }
@@ -22,7 +26,7 @@ class InputBuffer extends Buffer {
     }
 
     readByte() {
-        return this._data.getUint8(this.offset++);
+        return this.readUint8();
     }
 
     readBytes(n) {

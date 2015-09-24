@@ -23,6 +23,13 @@ describe('InputBuffer class', function () {
         buffer.length.should.equal(5);
     });
 
+    it('readBoolean', function () {
+        buffer.readBoolean().should.be.false();
+        buffer.readBoolean().should.be.true();
+        buffer.readBoolean().should.be.false();
+        buffer.readBoolean().should.be.true();
+    });
+
     it('readInt8', function () {
         buffer.readInt8().should.equal(0);
         buffer.readInt8().should.equal(-1);
