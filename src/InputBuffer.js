@@ -6,7 +6,11 @@ class InputBuffer extends Buffer {
     constructor(data) {
         super();
         if (data.buffer) {
-            data = data.buffer;
+            if (data.byteLength !== data.buffer.byteLength) { // Node.js buffer from pool
+                data = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+            } else {
+                data = data.buffer;
+            }
         }
         this.buffer = data;
         this.length = data.byteLength;
