@@ -1,6 +1,7 @@
 'use strict';
 
 const InputBuffer = require('..').InputBuffer;
+const Buffer = require('buffer').Buffer;
 
 describe('InputBuffer class', function () {
     const data = new Uint32Array([0xff00ff00, 0x00ff00ff]);
@@ -19,7 +20,7 @@ describe('InputBuffer class', function () {
         buffer = new InputBuffer(new Uint16Array(2));
         buffer.length.should.equal(4);
         // Node.js buffer
-        buffer = new InputBuffer(new require('buffer').SlowBuffer(5));
+        buffer = new InputBuffer(new Buffer(5));
         buffer.length.should.equal(5);
     });
 
