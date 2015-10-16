@@ -10,12 +10,15 @@ class OutputBuffer extends Buffer {
         this.buffer = new ArrayBuffer(byteLength);
         this.length = byteLength;
         this._data = new DataView(this.buffer);
+        this._increment = byteLength;
     }
 
     ensureAvailable(byteLength) {
         if (byteLength === undefined) byteLength = 1;
         if (!this.available(byteLength)) {
-            const newLength = this.length + byteLength;
+            const newIncrement = this._increment + this._increment;
+            this._increment = newIncrement;
+            const newLength = this.length + newIncrement;
             const newArray = new Uint8Array(newLength);
             newArray.set(new Uint8Array(this.buffer));
             this.buffer = newArray.buffer;
