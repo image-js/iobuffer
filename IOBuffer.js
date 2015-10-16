@@ -1,6 +1,7 @@
 'use strict';
 
 const defaultByteLength = 1024 * 8;
+const charArray = [];
 
 class IOBuffer {
     constructor(data) {
@@ -153,11 +154,11 @@ class IOBuffer {
 
     readChars(n) {
         if (n === undefined) n = 1;
-        var str = '';
+        charArray.length = n;
         for (var i = 0; i < n; i++) {
-            str += this.readChar();
+            charArray[i] = this.readChar();
         }
-        return str;
+        return charArray.join('');
     }
 
     writeBoolean(bool) {
