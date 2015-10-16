@@ -1,26 +1,26 @@
 'use strict';
 
-const InputBuffer = require('..').InputBuffer;
+const IOBuffer = require('..');
 const Buffer = require('buffer').Buffer;
 
-describe('InputBuffer class', function () {
+describe('read data', function () {
     const data = new Uint32Array([0xff00ff00, 0x00ff00ff]);
     let buffer;
     beforeEach(function () {
-        buffer = new InputBuffer(data);
+        buffer = new IOBuffer(data);
     });
 
     it('construct', function () {
         // ArrayBuffer
-        var buffer = new InputBuffer(new ArrayBuffer(4));
+        var buffer = new IOBuffer(new ArrayBuffer(4));
         buffer.length.should.equal(4);
         // Typed array
-        buffer = new InputBuffer(new Uint8Array(2));
+        buffer = new IOBuffer(new Uint8Array(2));
         buffer.length.should.equal(2);
-        buffer = new InputBuffer(new Uint16Array(2));
+        buffer = new IOBuffer(new Uint16Array(2));
         buffer.length.should.equal(4);
         // Node.js buffer
-        buffer = new InputBuffer(new Buffer(5));
+        buffer = new IOBuffer(new Buffer(5));
         buffer.length.should.equal(5);
     });
 
@@ -86,7 +86,7 @@ describe('InputBuffer class', function () {
 
     it('readChar(s)', function () {
         var chars = 'hello'.split('').map(char => char.charCodeAt(0));
-        var buffer = new InputBuffer(new Uint8Array(chars));
+        var buffer = new IOBuffer(new Uint8Array(chars));
         buffer.readChar().should.equal('h');
         buffer.readChars().should.equal('e');
         buffer.readChars(3).should.equal('llo');

@@ -1,11 +1,11 @@
 'use strict';
 
-const OutputBuffer = require('..').OutputBuffer;
+const IOBuffer = require('..');
 
-describe('OutputBuffer class', function () {
+describe('write data', function () {
     let buffer;
     beforeEach(function () {
-        buffer = new OutputBuffer(16);
+        buffer = new IOBuffer(16);
     });
 
     it('writeBoolean', function () {

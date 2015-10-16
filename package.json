@@ -2,7 +2,7 @@
   "name": "iobuffer",
   "version": "1.1.0-0",
   "description": "Read and write binary data on ArrayBuffers",
-  "main": "src/iobuffer.js",
+  "main": "./IOBuffer.js",
   "scripts": {
     "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive",
     "test-cov": "babel-istanbul cover node_modules/.bin/_mocha -- --require should --reporter dot --recursive",

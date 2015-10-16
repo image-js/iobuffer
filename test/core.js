@@ -1,11 +1,11 @@
 'use strict';
 
-const Buffer = require('..').Buffer;
+const IOBuffer = require('..');
 
-describe('Base Buffer class', function () {
+describe('core methods', function () {
     let buffer;
     beforeEach(function () {
-        buffer = new Buffer();
+        buffer = new IOBuffer();
     });
 
     it('should start at 0', function () {
