@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/image-js/iobuffer#readme",
   "devDependencies": {
-    "babel-istanbul": "^0.4.0",
+    "babel-istanbul": "^0.5.5",
     "mocha": "^2.3.3",
     "mocha-better-spec-reporter": "^3.0.0",
     "should": "^7.1.0"
