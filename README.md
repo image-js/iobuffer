@@ -15,9 +15,11 @@ $ npm install iobuffer
 
 ## API
 
-### Buffer
+### IOBuffer
 
-`InputBuffer` and `OutputBuffer` both inherit from `Buffer` which defines the following interface:
+#### new IOBuffer(data)
+
+`data` can be an ArrayBuffer or any Typed Array (including Node.js' Buffer from v4).
 
 #### buffer
 
@@ -67,13 +69,7 @@ Move the pointer back to the last offset stored by `mark`.
 
 Move the pointer back to offset `0`.
 
-### InputBuffer
-
-#### new InputBuffer(data)
-
-`data` can be an ArrayBuffer or any Typed Array (including Node.js' Buffer from v4).
-
-#### Methods
+#### Read methods
 
 Each method returns the value and moves the pointer forward by the number of read bytes.
 
