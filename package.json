@@ -25,6 +25,6 @@
     "babel-istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "mocha-better-spec-reporter": "^3.0.0",
-    "should": "^8.0.0"
+    "should": "^9.0.0"
   }
 }
