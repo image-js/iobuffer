@@ -4,26 +4,30 @@ const defaultByteLength = 1024 * 8;
 const charArray = [];
 
 class IOBuffer {
-    constructor(data) {
-        let length = 0;
+    constructor(data, options) {
+        options = options || {};
         if (data === undefined) {
             data = defaultByteLength;
         }
         if (typeof data === 'number') {
-            length = data;
             data = new ArrayBuffer(data);
         }
-        length = data.byteLength;
+        let length = data.byteLength;
+        const offset = options.offset ? options.offset>>>0 : 0;
         if (data.buffer) {
-            length = data.byteLength;
+            length = data.byteLength - offset;
             if (data.byteLength !== data.buffer.byteLength) { // Node.js buffer from pool
-                data = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+                data = data.buffer.slice(data.byteOffset + offset, data.byteOffset + data.byteLength);
+            } else if (offset) {
+                data = data.buffer.slice(offset);
             } else {
                 data = data.buffer;
             }
         }
         this.buffer = data;
         this.length = length;
+        this.byteLength = length;
+        this.byteOffset = 0;
         this.offset = 0;
         this.littleEndian = true;
         this._data = new DataView(this.buffer);
