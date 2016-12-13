@@ -43,6 +43,7 @@ class IOBuffer {
         this._data = new DataView(this.buffer);
         this._increment = length || defaultByteLength;
         this._mark = 0;
+        this._marks = [];
     }
 
     available(byteLength) {
@@ -77,6 +78,16 @@ class IOBuffer {
 
     mark() {
         this._mark = this.offset;
+    }
+
+    pushMark() {
+        this._marks.push(this.offset);
+    }
+
+    popMark() {
+        const offset = this._marks.pop();
+        if(offset === undefined) throw new Error('Mark stack empty');
+        this.seek(offset);
     }
 
     reset() {

@@ -65,6 +65,27 @@ describe('core methods', function () {
         buffer.offset.should.equal(12);
     });
 
+    it('pop and push marks', function () {
+        buffer.seek(5);
+        buffer.pushMark();
+        buffer.seek(10);
+        buffer.popMark();
+        buffer.offset.should.equal(5);
+        buffer.pushMark();
+        buffer.seek(12);
+        buffer.pushMark();
+        buffer.skip(1);
+        buffer.offset.should.equal(13);
+        buffer.popMark();
+        buffer.offset.should.equal(12);
+        buffer.popMark();
+        buffer.offset.should.equal(5);
+        (function () {
+            buffer.popMark();
+        }).should.throw(/Mark stack empty/);
+
+    });
+
     it('rewind', function () {
         buffer.seek(10);
         buffer.rewind();
