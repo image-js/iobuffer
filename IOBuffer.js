@@ -6,12 +6,12 @@ const charArray = [];
 /**
  * IOBuffer
  * @constructor
- * @param {undefined|number|ArrayBuffer|TypedArray|IOBuffer} data - The data to construct the IOBuffer with.
+ * @param {undefined|number|ArrayBuffer|DataView|IOBuffer} data - The data to construct the IOBuffer with.
  * If it's a number it will initialize the buffer with the number as the buffer's length
  * If it's undefined it will initialize the buffer with a default length of 8 Kb
  * If its an ArrayBuffer, a typed array or an IOBuffer instance, it will create a copy of the buffer
  * @param {object} options - An option object
- * @param {number} [option.offset=0} - copy the input data ignoring the first n bytes
+ * @param {number} [option.offset=0] - copy the input data ignoring the first n bytes
  * @property {ArrayBuffer} buffer - Reference to the internal ArrayBuffer object
  * @property {number} length - Byte length of the internal ArrayBuffer
  * @property {number} offset - The current offset of the buffer's pointer
