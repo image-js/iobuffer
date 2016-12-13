@@ -70,27 +70,33 @@ describe('write data', function () {
         check(buffer);
     });
 
-    //it('writeFloat32', function () {
-    //    buffer.writeFloat32().should.approximately(-1.71e38, 0.01e38);
-    //    buffer.writeFloat32().should.approximately(2.34e-38, 0.01e-38);
-    //});
+    it('writeFloat32', function () {
+        buffer.writeFloat32(-1.71e38);
+        buffer.writeFloat32(2.34e-38);
+        buffer.rewind();
+        buffer.readFloat32().should.approximately(-1.71e38, 0.01e38);
+        buffer.readFloat32().should.approximately(2.34e-38, 0.01e-38);
+    });
 
-    //it('writeFloat64', function () {
-    //    buffer.writeFloat64().should.approximately(7.06e-304, 0.01e-304);
-    //});
+    it('writeFloat64', function () {
+        buffer.writeFloat64(7.06e-304);
+        buffer.rewind();
+        buffer.readFloat64().should.approximately(7.06e-304, 0.01e-304);
+    });
 
-    //it('writeChar(s)', function () {
-    //    var chars = 'hello'.split('').map(char => char.charCodeAt(0));
-    //    var buffer = new InputBuffer(new Uint8Array(chars));
-    //    buffer.writeChar().should.equal('h');
-    //    buffer.writeChars().should.equal('e');
-    //    buffer.writeChars(3).should.equal('llo');
-    //});
+    it('writeChar(s)', function () {
+        const buffer = new IOBuffer(5);
+        buffer.writeChar('h');
+        buffer.writeChars('e');
+        buffer.writeChars('llo');
+        buffer.rewind();
+        buffer.readChars(5).should.equal('hello');
+    });
 });
 
 const good = new Uint8Array(new Uint32Array([0xff00ff00, 0x00ff00ff]).buffer);
 function check(buffer) {
     buffer.length.should.equal(16);
-    var ta = buffer.toArray();
+    const ta = buffer.toArray();
     ta.should.eql(good);
 }
