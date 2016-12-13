@@ -30,31 +30,29 @@ class IOBuffer {
             this._lastWrittenByte = data.byteLength;
         }
 
-        let length = data.byteLength;
+        let byteLength = data.byteLength;
         const offset = options.offset ? options.offset>>>0 : 0;
+        let dvOffset = offset;
         if (data.buffer) {
-            length = data.byteLength - offset;
-            if (data.byteLength !== data.buffer.byteLength) { // Node.js buffer from pool
-                data = data.buffer.slice(data.byteOffset + offset, data.byteOffset + data.byteLength);
-            } else if (offset) {
-                data = data.buffer.slice(offset);
-            } else {
-                data = data.buffer;
+            byteLength = data.byteLength - offset;
+            if (data.byteLength !== data.buffer.byteLength) {
+                dvOffset = data.byteOffset + offset;
             }
+            data = data.buffer;
         }
-        if(dataIsGiven) {
-            this._lastWrittenByte = length;
+        if (dataIsGiven) {
+            this._lastWrittenByte = byteLength;
         } else {
             this._lastWrittenByte = 0;
         }
         this.buffer = data;
-        this.length = length;
-        this.byteLength = length;
-        this.byteOffset = 0;
+        this.length = byteLength;
+        this.byteLength = byteLength;
+        this.byteOffset = dvOffset;
         this.offset = 0;
         this.littleEndian = true;
-        this._data = new DataView(this.buffer);
-        this._increment = length || defaultByteLength;
+        this._data = new DataView(this.buffer, dvOffset, byteLength);
+        this._increment = byteLength || defaultByteLength;
         this._mark = 0;
         this._marks = [];
     }
