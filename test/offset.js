@@ -14,4 +14,8 @@ describe('test with offset', function () {
         io2.readByte().should.equal(6);
         io2.readByte().should.equal(7);
     });
+    it('should add offset for new data', function () {
+        const io = new IOBuffer(128, {offset: 10});
+        io.byteLength.should.equal(118);
+    });
 });
