@@ -1,8 +1,5 @@
 'use strict';
 
-
-'use strict';
-
 const IOBuffer = require('..');
 
 describe('test toArray', function () {
@@ -37,8 +34,8 @@ describe('test toArray', function () {
         io3.toArray().byteLength.should.equal(9);
 
         {
-            const io = new IOBuffer(new IOBuffer(13), {offset:5});
+            const io = new IOBuffer(new IOBuffer(13), {offset: 5});
             io.toArray().byteLength.should.equal(8);
         }
-    })
+    });
 });

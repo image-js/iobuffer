@@ -92,9 +92,9 @@ describe('core methods', function () {
         buffer.offset.should.equal(0);
     });
 
-    it('is chainable', function() {
+    it('is chainable', function () {
         const io = new IOBuffer();
-        (function() {
+        (function () {
             io
                 .writeChars('abc')
                 .writeUint32(10)

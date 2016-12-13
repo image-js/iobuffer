@@ -7,9 +7,11 @@
     "IOBuffer.js"
   ],
   "scripts": {
-    "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive",
-    "test-cov": "istanbul cover node_modules/.bin/_mocha -- --require should --reporter dot --recursive",
-    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- --require should --reporter mocha-better-spec-reporter --recursive"
+    "eslint": "eslint IOBuffer.js test",
+    "eslint-fix": "npm run eslint -- --fix",
+    "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive; npm run eslint",
+    "test-cov": "istanbul cover _mocha -- --require should --reporter dot --recursive",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- --require should --reporter mocha-better-spec-reporter --recursive; npm run eslint"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,9 @@
   },
   "homepage": "https://github.com/image-js/iobuffer#readme",
   "devDependencies": {
+    "eslint": "^3.12.1",
+    "eslint-config-cheminfo": "^1.6.0",
+    "eslint-plugin-no-only-tests": "^1.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
     "mocha-better-spec-reporter": "^3.0.0",
