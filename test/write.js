@@ -92,6 +92,25 @@ describe('write data', function () {
         buffer.rewind();
         buffer.readChars(5).should.equal('hello');
     });
+
+    it('write with too small AB', function () {
+        const buffer = new IOBuffer(1);
+        buffer.writeFloat64(1);
+        buffer.byteLength.should.aboveOrEqual(4);
+        buffer.length.should.equal(buffer.byteLength);
+    });
+
+    it('ensureAvailable', function () {
+        const buffer = new IOBuffer(2);
+        buffer.ensureAvailable();
+        buffer.byteLength.should.equal(2);
+        buffer.skip(2);
+        buffer.ensureAvailable();
+        buffer.byteLength.should.aboveOrEqual(3);
+        buffer.seek(20);
+        buffer.ensureAvailable(30);
+        buffer.byteLength.should.aboveOrEqual(50);
+    });
 });
 
 const good = new Uint8Array(new Uint32Array([0xff00ff00, 0x00ff00ff]).buffer);

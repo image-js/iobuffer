@@ -179,7 +179,7 @@ class IOBuffer {
      * Make sure the buffer has sufficient memory to write a given byteLength at the current pointer offset
      * If the buffer's memory is insufficient, this method will create a new buffer (a copy) with a length
      * that is twice (byteLength + current offset)
-     * @param {number} byteLength
+     * @param {number} [byteLength = 1]
      * @return {IOBuffer}
      */
     ensureAvailable(byteLength) {
@@ -190,7 +190,7 @@ class IOBuffer {
             const newArray = new Uint8Array(newLength);
             newArray.set(new Uint8Array(this.buffer));
             this.buffer = newArray.buffer;
-            this.length = newLength;
+            this.length = this.byteLength = newLength;
             this._data = new DataView(this.buffer);
         }
         return this;
