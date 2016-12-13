@@ -14,7 +14,28 @@ $ npm install iobuffer
 ```
 
 ## API
+Complete [API documentation](http://image-js.github.io/iobuffer/)
 
+## Usage exemple
+```js
+const io = new IOBuffer();
+// Pointer offset is 0
+io
+    .writeChars('Hello world') // Written 11 chars, pointer offset now 11
+    .writeUint32(42)           // Written 32-bit int (default is little-endian), pointer offset now 15
+    .setBigEndian()            // Switch to big-endian mode
+    .writeUint32(24)           // Written another 32-bit int, but big-endian, pointer offset now 19
+    .mark()                    // bookmark current pointer offset
+    .skip(2)                   // Pointer offset now 21
+    .writeBoolean(true)        // Write 0xff, pointer offset now 22
+    .reset()                   // Go to bookmared pointer offset, pointer now 19
+    .setLittleEndian()         // Go back to little endian mode
+    .writeUint16(18)           // Write 16-bit unsigned integer in the previously skipped 2 bytes, pointer offset now 21
+    .rewind()                  // Pointer offset now 0
+    .toArray()                 // Create a DataView of the internal Buffer that ranges over the written buffer [0-21]
+    
+    
+```
 ### IOBuffer
 
 #### new IOBuffer(data)
