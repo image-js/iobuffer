@@ -91,4 +91,26 @@ describe('core methods', function () {
         buffer.rewind();
         buffer.offset.should.equal(0);
     });
+
+    it('is chainable', function() {
+        const io = new IOBuffer();
+        (function() {
+            io
+                .writeChars('abc')
+                .writeUint32(10)
+                .writeBoolean(true)
+                .writeByte(2)
+                .writeChar('x')
+                .rewind()
+                .skip(5)
+                .mark()
+                .pushMark()
+                .seek(30)
+                .reset()
+                .popMark()
+                .ensureAvailable(100)
+                .reset();
+        }).should.not.throw();
+
+    });
 });

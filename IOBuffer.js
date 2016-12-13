@@ -70,32 +70,39 @@ class IOBuffer {
     skip(n) {
         if (n === undefined) n = 1;
         this.offset += n;
+        return this;
     }
 
     seek(offset) {
         this.offset = offset;
+        return this;
     }
 
     mark() {
         this._mark = this.offset;
+        return this;
     }
 
     pushMark() {
         this._marks.push(this.offset);
+        return this;
     }
 
     popMark() {
         const offset = this._marks.pop();
         if(offset === undefined) throw new Error('Mark stack empty');
         this.seek(offset);
+        return this;
     }
 
     reset() {
         this.offset = this._mark;
+        return this;
     }
 
     rewind() {
         this.offset = 0;
+        return this;
     }
 
     ensureAvailable(byteLength) {
@@ -110,6 +117,7 @@ class IOBuffer {
             this.length = newLength;
             this._data = new DataView(this.buffer);
         }
+        return this;
     }
 
     readBoolean() {
@@ -188,22 +196,25 @@ class IOBuffer {
 
     writeBoolean(bool) {
         this.writeUint8(bool ? 0xff : 0x00);
+        return this;
     }
 
     writeInt8(value) {
         this.ensureAvailable(1);
         this._data.setInt8(this.offset++, value);
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeUint8(value) {
         this.ensureAvailable(1);
         this._data.setUint8(this.offset++, value);
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeByte(value) {
-        this.writeUint8(value);
+        return this.writeUint8(value);
     }
 
     writeBytes(bytes) {
@@ -212,6 +223,7 @@ class IOBuffer {
             this._data.setUint8(this.offset++, bytes[i]);
         }
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeInt16(value) {
@@ -219,6 +231,7 @@ class IOBuffer {
         this._data.setInt16(this.offset, value, this.littleEndian);
         this.offset += 2;
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeUint16(value) {
@@ -226,6 +239,7 @@ class IOBuffer {
         this._data.setUint16(this.offset, value, this.littleEndian);
         this.offset += 2;
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeInt32(value) {
@@ -233,6 +247,7 @@ class IOBuffer {
         this._data.setInt32(this.offset, value, this.littleEndian);
         this.offset += 4;
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeUint32(value) {
@@ -240,6 +255,7 @@ class IOBuffer {
         this._data.setUint32(this.offset, value, this.littleEndian);
         this.offset += 4;
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeFloat32(value) {
@@ -247,6 +263,7 @@ class IOBuffer {
         this._data.setFloat32(this.offset, value, this.littleEndian);
         this.offset += 4;
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeFloat64(value) {
@@ -254,16 +271,18 @@ class IOBuffer {
         this._data.setFloat64(this.offset, value, this.littleEndian);
         this.offset += 8;
         this._updateLastWrittenByte();
+        return this;
     }
 
     writeChar(str) {
-        this.writeUint8(str.charCodeAt(0));
+        return this.writeUint8(str.charCodeAt(0));
     }
 
     writeChars(str) {
         for (var i = 0; i < str.length; i++) {
             this.writeUint8(str.charCodeAt(i));
         }
+        return this;
     }
 
     toArray() {
