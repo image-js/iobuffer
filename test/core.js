@@ -109,6 +109,8 @@ describe('core methods', function () {
                 .reset()
                 .popMark()
                 .ensureAvailable(100)
+                .setLittleEndian()
+                .setBigEndian()
                 .reset();
         }).should.not.throw();
 

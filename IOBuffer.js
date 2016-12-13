@@ -83,6 +83,7 @@ class IOBuffer {
      */
     setLittleEndian() {
         this.littleEndian = true;
+        return this;
     }
 
     /**
@@ -99,6 +100,7 @@ class IOBuffer {
      */
     setBigEndian() {
         this.littleEndian = false;
+        return this;
     }
 
     /**
