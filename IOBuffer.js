@@ -187,8 +187,6 @@ class IOBuffer {
         if (!this.available(byteLength)) {
             const lengthNeeded = this.offset + byteLength;
             const newLength = lengthNeeded * 2;
-
-
             const newArray = new Uint8Array(newLength);
             newArray.set(new Uint8Array(this.buffer));
             this.buffer = newArray.buffer;
@@ -233,7 +231,7 @@ class IOBuffer {
 
     /**
      * Read n bytes and move pointer forward.
-     * @param n
+     * @param {number} n
      * @return {Uint8Array}
      */
     readBytes(n) {
@@ -315,7 +313,7 @@ class IOBuffer {
 
     /**
      * Read n 1-byte ascii characters and move pointer forward
-     * @param n
+     * @param {number} n
      * @return {string}
      */
     readChars(n) {
@@ -339,7 +337,7 @@ class IOBuffer {
 
     /**
      * Write value as an 8-bit signed integer
-     * @param value
+     * @param {number} value
      * @return {IOBuffer}
      */
     writeInt8(value) {
@@ -351,7 +349,7 @@ class IOBuffer {
 
     /**
      * Write value as a 8-bit unsigned integer
-     * @param value
+     * @param {number} value
      * @return {IOBuffer}
      */
     writeUint8(value) {
@@ -363,7 +361,7 @@ class IOBuffer {
 
     /**
      * An alias for {@link IOBuffer#writeUint8}
-     * @param value
+     * @param {number} value
      * @return {IOBuffer}
      */
     writeByte(value) {
@@ -386,7 +384,7 @@ class IOBuffer {
 
     /**
      * Write value as an 16-bit signed integer
-     * @param value
+     * @param {number} value
      * @return {IOBuffer}
      */
     writeInt16(value) {
@@ -399,7 +397,7 @@ class IOBuffer {
 
     /**
      * Write value as a 16-bit unsigned integer
-     * @param value
+     * @param {number} value
      * @return {IOBuffer}
      */
     writeUint16(value) {
@@ -412,7 +410,7 @@ class IOBuffer {
 
     /**
      * Write a 32-bit signed integer at the current pointer offset
-     * @param value
+     * @param {number} value
      * @return {IOBuffer}
      */
     writeInt32(value) {
@@ -425,7 +423,7 @@ class IOBuffer {
 
     /**
      * Write a 32-bit unsigned integer at the current pointer offset
-     * @param value - The value to set
+     * @param {number} value - The value to set
      * @return {IOBuffer}
      */
     writeUint32(value) {
@@ -438,7 +436,7 @@ class IOBuffer {
 
     /**
      * Write a 32-bit floating number at the current pointer offset
-     * @param value - The value to set
+     * @param {number} value - The value to set
      * @return {IOBuffer}
      */
     writeFloat32(value) {
@@ -451,7 +449,7 @@ class IOBuffer {
 
     /**
      * Write a 64-bit floating number at the current pointer offset
-     * @param value
+     * @param {number} value
      * @return {IOBuffer}
      */
     writeFloat64(value) {
@@ -473,7 +471,7 @@ class IOBuffer {
 
     /**
      * Write the charCodes of the passed string's characters to the current pointer offset
-     * @param str
+     * @param {string} str
      * @return {IOBuffer}
      */
     writeChars(str) {
