@@ -45,7 +45,7 @@ io
 [npm-url]: https://www.npmjs.com/package/iobuffer
 [travis-image]: https://img.shields.io/travis/image-js/iobuffer/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/image-js/iobuffer
-[codecov-image]: https://img.shields.io/codecov/c/image-js/iobuffer.svg?style=flat-square
+[codecov-image]: https://img.shields.io/codecov/c/github/image-js/iobuffer.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/image-js/iobuffer
 [download-image]: https://img.shields.io/npm/dm/iobuffer.svg?style=flat-square
 [download-url]: https://www.npmjs.com/package/iobuffer
