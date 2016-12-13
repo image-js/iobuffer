@@ -55,7 +55,6 @@ class IOBuffer {
         this.offset = 0;
         this.littleEndian = true;
         this._data = new DataView(this.buffer, dvOffset, byteLength);
-        this._increment = byteLength || defaultByteLength;
         this._mark = 0;
         this._marks = [];
     }
@@ -178,16 +177,18 @@ class IOBuffer {
 
     /**
      * Make sure the buffer has sufficient memory to write a given byteLength at the current pointer offset
-     * If the buffer's memory is insufficient, this method will double the internal buffer's length
+     * If the buffer's memory is insufficient, this method will create a new buffer (a copy) with a length
+     * that is twice (byteLength + current offset)
      * @param {number} byteLength
      * @return {IOBuffer}
      */
     ensureAvailable(byteLength) {
         if (byteLength === undefined) byteLength = 1;
         if (!this.available(byteLength)) {
-            const newIncrement = this._increment + this._increment;
-            this._increment = newIncrement;
-            const newLength = this.length + newIncrement;
+            const lengthNeeded = this.offset + byteLength;
+            const newLength = lengthNeeded * 2;
+
+
             const newArray = new Uint8Array(newLength);
             newArray.set(new Uint8Array(this.buffer));
             this.buffer = newArray.buffer;
