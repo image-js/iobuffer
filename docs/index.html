@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>iobuffer 2.1.0 | Documentation</title>
+  <title>iobuffer 3.0.0 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>iobuffer</h3>
-          <div class='mb1'><code>2.1.0</code></div>
+          <div class='mb1'><code>3.0.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -304,7 +304,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L19-L501'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L23-L503'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -314,7 +314,7 @@
   <p>IOBuffer</p>
 
 
-  <div class='pre p1 fill-light mt0'>new IOBuffer(data: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView">DataView</a> | <a href="#iobuffer">IOBuffer</a>), options: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>, option.offset: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>])</div>
+  <div class='pre p1 fill-light mt0'>new IOBuffer(data: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> | TypedArray | <a href="#iobuffer">IOBuffer</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>), options: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>])</div>
 
   
 
@@ -330,10 +330,11 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>data</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView">DataView</a> | <a href="#iobuffer">IOBuffer</a>))</code> The data to construct the IOBuffer with.
-If it's a number it will initialize the buffer with the number as the buffer's length
-If it's undefined it will initialize the buffer with a default length of 8 Kb
-If its an ArrayBuffer, a typed array or an IOBuffer instance, it will create a copy of the buffer
+            <span class='code bold'>data</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined">undefined</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a> | TypedArray | <a href="#iobuffer">IOBuffer</a> | <a href="https://nodejs.org/api/buffer.html">Buffer</a>))</code> The data to construct the IOBuffer with.
+<p>If it's a number, it will initialize the buffer with the number as the buffer's length<br>
+If it's undefined, it will initialize the buffer with a default length of 8 Kb<br>
+If its an ArrayBuffer, a TypedArray, an IOBuffer instance,
+or a Node.js Buffer, it will create a view over the underlying ArrayBuffer.</p>
 
           </div>
           
@@ -341,19 +342,33 @@ If its an ArrayBuffer, a typed array or an IOBuffer instance, it will create a c
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code> An option object
-
+            <span class='code bold'>options</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>])</code> 
           </div>
           
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>option.offset</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]
-            (default <code>0</code>)
-            )</code> copy the input data ignoring the first n bytes
-
-          </div>
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>options.offset</span> <code class='quiet'>[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]</code>
+                  
+                    (default <code>0</code>)
+                  </td>
+                  <td class='break-word'><span>Ignore the first n bytes of the ArrayBuffer
+</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
           
         </div>
       
@@ -381,6 +396,20 @@ If its an ArrayBuffer, a typed array or an IOBuffer instance, it will create a c
         <div class='space-bottom0'>
           <span class='code bold'>offset</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
           : The current offset of the buffer's pointer
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>byteLength</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : Byte length of the internal ArrayBuffer
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>byteOffset</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : Byte offset of the internal ArrayBuffer
 
           
         </div>
@@ -414,7 +443,7 @@ If its an ArrayBuffer, a typed array or an IOBuffer instance, it will create a c
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L67-L70'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L67-L70'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -481,7 +510,7 @@ If its an ArrayBuffer, a typed array or an IOBuffer instance, it will create a c
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>ensureAvailable(byteLength)</span>
+            <span class='code strong strong truncate'>ensureAvailable([byteLength])</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -491,7 +520,7 @@ If its an ArrayBuffer, a typed array or an IOBuffer instance, it will create a c
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L184-L197'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L185-L197'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -499,10 +528,11 @@ If its an ArrayBuffer, a typed array or an IOBuffer instance, it will create a c
   
 
   <p>Make sure the buffer has sufficient memory to write a given byteLength at the current pointer offset
-If the buffer's memory is insufficient, this method will double the internal buffer's length</p>
+If the buffer's memory is insufficient, this method will create a new buffer (a copy) with a length
+that is twice (byteLength + current offset)</p>
 
 
-  <div class='pre p1 fill-light mt0'>ensureAvailable(byteLength: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>ensureAvailable(byteLength: [<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -518,7 +548,9 @@ If the buffer's memory is insufficient, this method will double the internal buf
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>byteLength</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
+            <span class='code bold'>byteLength</span> <code class='quiet'>([<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>]
+            (default <code>1</code>)
+            )</code> 
           </div>
           
         </div>
@@ -566,7 +598,7 @@ If the buffer's memory is insufficient, this method will double the internal buf
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L93-L95'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L93-L95'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -628,7 +660,7 @@ If the buffer's memory is insufficient, this method will double the internal buf
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L76-L78'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L76-L78'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -690,7 +722,7 @@ If the buffer's memory is insufficient, this method will double the internal buf
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L132-L135'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L132-L135'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -752,7 +784,7 @@ If the buffer's memory is insufficient, this method will double the internal buf
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L162-L167'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L162-L167'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -814,7 +846,7 @@ If the buffer's memory is insufficient, this method will double the internal buf
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L152-L155'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L152-L155'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -876,7 +908,7 @@ If the buffer's memory is insufficient, this method will double the internal buf
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L204-L206'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L204-L206'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -939,7 +971,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L228-L230'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L228-L230'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1001,7 +1033,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L237-L244'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L237-L244'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1011,7 +1043,7 @@ Moves pointer forward</p>
   <p>Read n bytes and move pointer forward.</p>
 
 
-  <div class='pre p1 fill-light mt0'>readBytes(n: any): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array">Uint8Array</a></div>
+  <div class='pre p1 fill-light mt0'>readBytes(n: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array">Uint8Array</a></div>
 
   
 
@@ -1027,7 +1059,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>n</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>n</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
@@ -1075,7 +1107,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L310-L312'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L310-L312'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1137,7 +1169,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L319-L326'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L319-L326'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1147,7 +1179,7 @@ Moves pointer forward</p>
   <p>Read n 1-byte ascii characters and move pointer forward</p>
 
 
-  <div class='pre p1 fill-light mt0'>readChars(n: any): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+  <div class='pre p1 fill-light mt0'>readChars(n: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
 
   
 
@@ -1163,7 +1195,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>n</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>n</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
@@ -1211,7 +1243,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L290-L294'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L290-L294'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1273,7 +1305,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L300-L304'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L300-L304'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1335,7 +1367,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L250-L254'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L250-L254'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1397,7 +1429,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L270-L274'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L270-L274'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1459,7 +1491,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L212-L214'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L212-L214'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1521,7 +1553,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L260-L264'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L260-L264'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1583,7 +1615,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L280-L284'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L280-L284'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1645,7 +1677,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L220-L222'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L220-L222'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1707,7 +1739,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L142-L145'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L142-L145'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1769,7 +1801,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L173-L176'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L173-L176'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1831,7 +1863,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L122-L125'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L122-L125'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1905,7 +1937,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L101-L104'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L101-L104'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -1967,7 +1999,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L84-L87'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L84-L87'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2029,7 +2061,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L111-L115'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L111-L115'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2103,14 +2135,16 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L488-L490'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L490-L492'>
       <span>IOBuffer.js</span>
       </a>
     
   </div>
   
 
-  <p>Export a view of the internal buffer. The view spans from offset 0 to the largest written offset</p>
+  <p>Export a Uint8Array view of the internal buffer.
+The view starts at the byte offset and its length
+is calculated to stop at the last written byte or the original length.</p>
 
 
   <div class='pre p1 fill-light mt0'>toArray(): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array">Uint8Array</a></div>
@@ -2165,7 +2199,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L333-L336'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L333-L336'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2239,7 +2273,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L367-L369'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L367-L369'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2249,7 +2283,7 @@ Moves pointer forward</p>
   <p>An alias for <a href="#iobufferwriteuint8">IOBuffer#writeUint8</a></p>
 
 
-  <div class='pre p1 fill-light mt0'>writeByte(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeByte(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -2265,7 +2299,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
@@ -2313,7 +2347,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L376-L383'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L376-L383'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2387,7 +2421,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L468-L470'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L468-L470'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2462,7 +2496,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L477-L482'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L477-L482'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2472,7 +2506,7 @@ Moves pointer forward</p>
   <p>Write the charCodes of the passed string's characters to the current pointer offset</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeChars(str: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeChars(str: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -2488,7 +2522,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>str</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>str</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code> 
           </div>
           
         </div>
@@ -2536,7 +2570,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L442-L448'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L442-L448'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2546,7 +2580,7 @@ Moves pointer forward</p>
   <p>Write a 32-bit floating number at the current pointer offset</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeFloat32(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeFloat32(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -2562,7 +2596,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> The value to set
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> The value to set
 
           </div>
           
@@ -2611,7 +2645,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L455-L461'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L455-L461'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2621,7 +2655,7 @@ Moves pointer forward</p>
   <p>Write a 64-bit floating number at the current pointer offset</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeFloat64(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeFloat64(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -2637,7 +2671,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
@@ -2685,7 +2719,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L390-L396'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L390-L396'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2695,7 +2729,7 @@ Moves pointer forward</p>
   <p>Write value as an 16-bit signed integer</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeInt16(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeInt16(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -2711,7 +2745,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
@@ -2759,7 +2793,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L416-L422'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L416-L422'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2769,7 +2803,7 @@ Moves pointer forward</p>
   <p>Write a 32-bit signed integer at the current pointer offset</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeInt32(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeInt32(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -2785,7 +2819,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
@@ -2833,7 +2867,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L343-L348'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L343-L348'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2843,7 +2877,7 @@ Moves pointer forward</p>
   <p>Write value as an 8-bit signed integer</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeInt8(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeInt8(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -2859,7 +2893,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
@@ -2907,7 +2941,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L403-L409'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L403-L409'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2917,7 +2951,7 @@ Moves pointer forward</p>
   <p>Write value as a 16-bit unsigned integer</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeUint16(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeUint16(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -2933,7 +2967,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
@@ -2981,7 +3015,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L429-L435'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L429-L435'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -2991,7 +3025,7 @@ Moves pointer forward</p>
   <p>Write a 32-bit unsigned integer at the current pointer offset</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeUint32(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeUint32(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -3007,7 +3041,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> The value to set
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> The value to set
 
           </div>
           
@@ -3056,7 +3090,7 @@ Moves pointer forward</p>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/eb3954c0e91a6ec5d6afd9b841db0aa210141b05/IOBuffer.js#L355-L360'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/image-js/iobuffer/blob/5eb9543901d17356e6141fecff0cec179b1e19ed/IOBuffer.js#L355-L360'>
       <span>IOBuffer.js</span>
       </a>
     
@@ -3066,7 +3100,7 @@ Moves pointer forward</p>
   <p>Write value as a 8-bit unsigned integer</p>
 
 
-  <div class='pre p1 fill-light mt0'>writeUint8(value: any): <a href="#iobuffer">IOBuffer</a></div>
+  <div class='pre p1 fill-light mt0'>writeUint8(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#iobuffer">IOBuffer</a></div>
 
   
 
@@ -3082,7 +3116,7 @@ Moves pointer forward</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code> 
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code> 
           </div>
           
         </div>
