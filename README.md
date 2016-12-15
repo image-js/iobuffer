@@ -21,7 +21,7 @@ Complete [API documentation](http://image-js.github.io/iobuffer/)
 const io = new IOBuffer();
 // Pointer offset is 0
 io
-    .writeChars('Hello world') // Written 11 chars, pointer offset now 11
+    .writeChars('Hello world') // Written 11 chars, pointer offset now 11 (->15)
     .writeUint32(42)           // Written 32-bit int (default is little-endian), pointer offset now 15
     .setBigEndian()            // Switch to big-endian mode
     .writeUint32(24)           // Written another 32-bit int, but big-endian, pointer offset now 19
@@ -32,9 +32,7 @@ io
     .setLittleEndian()         // Go back to little endian mode
     .writeUint16(18)           // Write 16-bit unsigned integer in the previously skipped 2 bytes, pointer offset now 21
     .rewind()                  // Pointer offset now 0
-    .toArray()                 // Create a DataView of the internal Buffer that ranges over the written buffer [0-21]
-    
-    
+    .getBuffer()               // Get a DataView or Buffer (in node.js) over the written part [0-21] of the internal Buffer
 ```
 
 ## License
