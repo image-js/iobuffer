@@ -1,3 +1,13 @@
+<a name="3.1.0"></a>
+# [3.1.0](https://github.com/image-js/iobuffer/compare/v3.0.0...v3.1.0) (2016-12-15)
+
+
+### Features
+
+* add getBuffer method ([c798093](https://github.com/image-js/iobuffer/commit/c798093))
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/image-js/iobuffer/compare/v2.1.0...v3.0.0) (2016-12-13)
 
