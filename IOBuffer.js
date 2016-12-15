@@ -492,6 +492,18 @@ class IOBuffer {
     }
 
     /**
+     * Same as {@link IOBuffer#toArray} but returns a Buffer if possible. Otherwise returns a Uint8Array.
+     * @return {Buffer|Uint8Array}
+     */
+    getBuffer() {
+        if (typeof Buffer !== 'undefined') {
+            return Buffer.from(this.toArray());
+        } else {
+            return this.toArray();
+        }
+    }
+
+    /**
      * Update the last written byte offset
      * @private
      */

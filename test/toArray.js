@@ -38,4 +38,27 @@ describe('test toArray', function () {
             io.toArray().byteLength.should.equal(8);
         }
     });
+
+    it('getBuffer', function () {
+        {
+            const io = new IOBuffer(new ArrayBuffer(7));
+            const buffer = io.getBuffer();
+            buffer.should.be.instanceOf(Buffer);
+            buffer.length.should.equal(7);
+        }
+
+        {
+            const OldBuffer = global.Buffer;
+            global.Buffer = undefined;
+
+            const io = new IOBuffer(new ArrayBuffer(7));
+            const buffer = io.getBuffer();
+
+            buffer.should.be.instanceOf(Uint8Array);
+            buffer.should.not.be.instanceOf(OldBuffer);
+            buffer.length.should.equal(7);
+
+            global.Buffer = OldBuffer;
+        }
+    });
 });
