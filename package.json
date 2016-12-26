@@ -31,5 +31,8 @@
     "mocha": "^3.0.2",
     "mocha-better-spec-reporter": "^3.0.0",
     "should": "^11.1.0"
+  },
+  "dependencies": {
+    "utf8": "^2.1.2"
   }
 }

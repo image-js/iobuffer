@@ -1,5 +1,7 @@
 'use strict';
 
+const utf8 = require('utf8');
+
 const defaultByteLength = 1024 * 8;
 const charArray = [];
 
@@ -326,6 +328,17 @@ class IOBuffer {
     }
 
     /**
+     * Read the next n bytes, return a UTF-8 decoded string and move pointer forward
+     * @param {number} n
+     * @return {string}
+     */
+    readUtf8(n) {
+        if (n === undefined) n = 1;
+        const bString = this.readChars(n);
+        return utf8.decode(bString);
+    }
+
+    /**
      * Write 0xff if the passed value is truthy, 0x00 otherwise
      * @param {any} value
      * @return {IOBuffer}
@@ -479,6 +492,16 @@ class IOBuffer {
             this.writeUint8(str.charCodeAt(i));
         }
         return this;
+    }
+
+    /**
+     * UTF-8 encode and write the passed string to the current pointer offset
+     * @param {string} str
+     * @return {IOBuffer}
+     */
+    writeUtf8(str) {
+        const bString = utf8.encode(str);
+        return this.writeChars(bString);
     }
 
     /**

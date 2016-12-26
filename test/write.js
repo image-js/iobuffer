@@ -111,6 +111,16 @@ describe('write data', function () {
         buffer.ensureAvailable(30);
         buffer.byteLength.should.aboveOrEqual(50);
     });
+
+    it('writeUtf8', function () {
+        const buffer = new IOBuffer();
+        buffer.writeByte(42);
+        buffer.writeUtf8('42€');
+        buffer.writeByte(42);
+        const uint8 = buffer.getBuffer();
+        uint8.length.should.equal(7);
+        uint8.should.eql(Buffer.from([42, 0x34, 0x32, 0xE2, 0x82, 0xAC, 42]));
+    });
 });
 
 const good = new Uint8Array(new Uint32Array([0xff00ff00, 0x00ff00ff]).buffer);

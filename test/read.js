@@ -91,4 +91,12 @@ describe('read data', function () {
         buffer.readChars().should.equal('e');
         buffer.readChars(3).should.equal('llo');
     });
+
+    it('readUtf8', function () {
+        var buffer = new IOBuffer(Buffer.from([42, 0x34, 0x32, 0xE2, 0x82, 0xAC, 42]));
+        buffer.readByte().should.equal(42);
+        var str = buffer.readUtf8(5);
+        str.should.equal('42€');
+        buffer.readByte().should.equal(42);
+    });
 });
