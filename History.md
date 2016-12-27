@@ -1,3 +1,13 @@
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/image-js/iobuffer/compare/v3.1.0...v3.2.0) (2016-12-27)
+
+
+### Features
+
+* add readUtf8 and writeUtf8 ([6118a54](https://github.com/image-js/iobuffer/commit/6118a54)), closes [#31](https://github.com/image-js/iobuffer/issues/31)
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/image-js/iobuffer/compare/v3.0.0...v3.1.0) (2016-12-15)
 
