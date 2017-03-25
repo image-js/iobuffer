@@ -16,7 +16,7 @@ $ npm install iobuffer
 ## API
 Complete [API documentation](http://image-js.github.io/iobuffer/)
 
-## Usage exemple
+## Usage example
 ```js
 const io = new IOBuffer();
 // Pointer offset is 0
