@@ -26,7 +26,7 @@
   "devDependencies": {
     "eslint": "^3.12.1",
     "eslint-config-cheminfo": "^1.6.0",
-    "eslint-plugin-no-only-tests": "^1.1.0",
+    "eslint-plugin-no-only-tests": "^2.0.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.0.2",
     "mocha-better-spec-reporter": "^3.0.0",
