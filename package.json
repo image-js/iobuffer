@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/image-js/iobuffer#readme",
   "devDependencies": {
-    "eslint": "^3.12.1",
+    "eslint": "^4.1.0",
     "eslint-config-cheminfo": "^1.6.0",
     "eslint-plugin-no-only-tests": "^2.0.0",
     "istanbul": "^0.4.5",
