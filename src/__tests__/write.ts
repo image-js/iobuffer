@@ -115,9 +115,9 @@ describe('write data', () => {
     theBuffer.writeByte(42);
     theBuffer.writeUtf8('42€');
     theBuffer.writeByte(42);
-    const uint8 = theBuffer.getBuffer();
+    const uint8 = theBuffer.toArray();
     expect(uint8).toHaveLength(7);
-    expect(uint8).toEqual(Buffer.from([42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42]));
+    expect(uint8).toEqual(Uint8Array.of(42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42));
   });
 });
 

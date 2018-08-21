@@ -36,27 +36,4 @@ describe('test toArray', () => {
       expect(io.toArray().byteLength).toBe(8);
     }
   });
-
-  it('getBuffer', () => {
-    {
-      const io = new IOBuffer(new ArrayBuffer(7));
-      const buffer = io.getBuffer();
-      expect(buffer).toBeInstanceOf(Buffer);
-      expect(buffer).toHaveLength(7);
-    }
-
-    {
-      const OldBuffer = global.Buffer;
-      global.Buffer = undefined;
-
-      const io = new IOBuffer(new ArrayBuffer(7));
-      const buffer = io.getBuffer();
-
-      expect(buffer).toBeInstanceOf(Uint8Array);
-      expect(buffer).not.toBeInstanceOf(OldBuffer);
-      expect(buffer).toHaveLength(7);
-
-      global.Buffer = OldBuffer;
-    }
-  });
 });

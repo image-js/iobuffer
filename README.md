@@ -35,7 +35,7 @@ io.writeChars('Hello world') // Write 11 chars, pointer offset now 11 (->15)
   .setLittleEndian() // Go back to little endian mode
   .writeUint16(18) // Write 16-bit unsigned integer in the previously skipped 2 bytes, pointer offset now 21
   .rewind() // Pointer offset back to 0
-  .getBuffer(); // Get a DataView or Buffer (in node.js) over the written part [0-21] of the internal ArrayBuffer
+  .toArray(); // Get a Uint8Array over the written part [0-21] of the internal ArrayBuffer
 ```
 
 ## License
