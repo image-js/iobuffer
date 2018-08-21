@@ -1,14 +1,12 @@
-'use strict';
+import { IOBuffer } from '../IOBuffer';
 
-const IOBuffer = require('..');
-
-describe('write data', function () {
+describe('write data', () => {
   let buffer;
-  beforeEach(function () {
+  beforeEach(() => {
     buffer = new IOBuffer(16);
   });
 
-  it('writeBoolean', function () {
+  it('writeBoolean', () => {
     buffer.writeBoolean();
     buffer.writeBoolean(true);
     buffer.writeBoolean(false);
@@ -20,7 +18,7 @@ describe('write data', function () {
     check(buffer);
   });
 
-  it('writeInt8', function () {
+  it('writeInt8', () => {
     buffer.writeInt8(0);
     buffer.writeInt8(-1);
     buffer.writeInt8(0);
@@ -32,7 +30,7 @@ describe('write data', function () {
     check(buffer);
   });
 
-  it('writeUint8 / writeByte / writeBytes', function () {
+  it('writeUint8 / writeByte / writeBytes', () => {
     buffer.writeUint8(0);
     buffer.writeUint8(255);
     buffer.writeByte(0);
@@ -42,7 +40,7 @@ describe('write data', function () {
     check(buffer);
   });
 
-  it('writeInt16', function () {
+  it('writeInt16', () => {
     buffer.writeInt16(-256);
     buffer.writeInt16(-256);
     buffer.writeInt16(255);
@@ -50,7 +48,7 @@ describe('write data', function () {
     check(buffer);
   });
 
-  it('writeUint16', function () {
+  it('writeUint16', () => {
     buffer.writeUint16(65280);
     buffer.writeUint16(65280);
     buffer.writeUint16(255);
@@ -58,19 +56,19 @@ describe('write data', function () {
     check(buffer);
   });
 
-  it('writeInt32', function () {
+  it('writeInt32', () => {
     buffer.writeInt32(-16711936);
     buffer.writeInt32(16711935);
     check(buffer);
   });
 
-  it('writeUint32', function () {
+  it('writeUint32', () => {
     buffer.writeUint32(4278255360);
     buffer.writeUint32(16711935);
     check(buffer);
   });
 
-  it('writeFloat32', function () {
+  it('writeFloat32', () => {
     buffer.writeFloat32(-1.71e38);
     buffer.writeFloat32(2.34e-38);
     buffer.rewind();
@@ -78,46 +76,46 @@ describe('write data', function () {
     expect(buffer.readFloat32()).toMatchSnapshot();
   });
 
-  it('writeFloat64', function () {
+  it('writeFloat64', () => {
     buffer.writeFloat64(7.06e-304);
     buffer.rewind();
     expect(buffer.readFloat64()).toMatchSnapshot();
   });
 
-  it('writeChar(s)', function () {
-    const buffer = new IOBuffer(5);
-    buffer.writeChar('h');
-    buffer.writeChars('e');
-    buffer.writeChars('llo');
-    buffer.rewind();
-    expect(buffer.readChars(5)).toBe('hello');
+  it('writeChar(s)', () => {
+    const theBuffer = new IOBuffer(5);
+    theBuffer.writeChar('h');
+    theBuffer.writeChars('e');
+    theBuffer.writeChars('llo');
+    theBuffer.rewind();
+    expect(theBuffer.readChars(5)).toBe('hello');
   });
 
-  it('write with too small AB', function () {
-    const buffer = new IOBuffer(1);
-    buffer.writeFloat64(1);
-    expect(buffer.byteLength).toBeGreaterThanOrEqual(4);
-    expect(buffer).toHaveLength(buffer.byteLength);
+  it('write with too small AB', () => {
+    const theBuffer = new IOBuffer(1);
+    theBuffer.writeFloat64(1);
+    expect(theBuffer.byteLength).toBeGreaterThanOrEqual(4);
+    expect(theBuffer).toHaveLength(theBuffer.byteLength);
   });
 
-  it('ensureAvailable', function () {
-    const buffer = new IOBuffer(2);
-    buffer.ensureAvailable();
-    expect(buffer.byteLength).toBe(2);
-    buffer.skip(2);
-    buffer.ensureAvailable();
-    expect(buffer.byteLength).toBeGreaterThanOrEqual(3);
-    buffer.seek(20);
-    buffer.ensureAvailable(30);
-    expect(buffer.byteLength).toBeGreaterThanOrEqual(50);
+  it('ensureAvailable', () => {
+    const theBuffer = new IOBuffer(2);
+    theBuffer.ensureAvailable();
+    expect(theBuffer.byteLength).toBe(2);
+    theBuffer.skip(2);
+    theBuffer.ensureAvailable();
+    expect(theBuffer.byteLength).toBeGreaterThanOrEqual(3);
+    theBuffer.seek(20);
+    theBuffer.ensureAvailable(30);
+    expect(theBuffer.byteLength).toBeGreaterThanOrEqual(50);
   });
 
-  it('writeUtf8', function () {
-    const buffer = new IOBuffer();
-    buffer.writeByte(42);
-    buffer.writeUtf8('42€');
-    buffer.writeByte(42);
-    const uint8 = buffer.getBuffer();
+  it('writeUtf8', () => {
+    const theBuffer = new IOBuffer();
+    theBuffer.writeByte(42);
+    theBuffer.writeUtf8('42€');
+    theBuffer.writeByte(42);
+    const uint8 = theBuffer.getBuffer();
     expect(uint8).toHaveLength(7);
     expect(uint8).toEqual(Buffer.from([42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42]));
   });

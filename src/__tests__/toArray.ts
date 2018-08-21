@@ -1,9 +1,7 @@
-'use strict';
+import { IOBuffer } from '../IOBuffer';
 
-const IOBuffer = require('..');
-
-describe('test toArray', function () {
-  it('from scratch', function () {
+describe('test toArray', () => {
+  it('from scratch', () => {
     const io1 = new IOBuffer();
     expect(io1.toArray().byteLength).toBe(0);
     io1.writeUint32(100);
@@ -21,7 +19,7 @@ describe('test toArray', function () {
     expect(io2.toArray().byteLength).toBe(4);
   });
 
-  it('from value', function () {
+  it('from value', () => {
     {
       const io = new IOBuffer(new ArrayBuffer(7));
       expect(io.toArray().byteLength).toBe(7);
@@ -39,7 +37,7 @@ describe('test toArray', function () {
     }
   });
 
-  it('getBuffer', function () {
+  it('getBuffer', () => {
     {
       const io = new IOBuffer(new ArrayBuffer(7));
       const buffer = io.getBuffer();
