@@ -14,7 +14,7 @@
     "test": "npm run test-only && npm run tslint",
     "test-coverage": "npm run test-only -- --coverage",
     "test-only": "jest",
-    "test-travis": "npm run test-coverage && npm run eslint",
+    "test-travis": "npm run test-coverage && npm run tslint",
     "tsc": "npm run clean && npm run tsc-es5 && npm run tsc-es6",
     "tsc-es5": "tsc",
     "tsc-es6": "tsc --project tsconfig.es6.json",
