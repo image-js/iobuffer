@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`read data readFloat32 1`] = `-1.714652191593956e+38`;
+
+exports[`read data readFloat32 2`] = `2.3418408851396162e-38`;
+
+exports[`read data readFloat64 1`] = `7.0641644724607326e-304`;

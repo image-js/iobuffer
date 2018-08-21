@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`write data writeFloat32 1`] = `-1.7100000153031665e+38`;
+
+exports[`write data writeFloat32 2`] = `2.3399999993470327e-38`;
+
+exports[`write data writeFloat64 1`] = `7.06e-304`;

@@ -1,1 +1,1 @@
-extends: eslint-config-cheminfo
+extends: cheminfo
