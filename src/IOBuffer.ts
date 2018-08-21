@@ -18,12 +18,12 @@ interface IOBufferOptions {
 /**
  * IOBuffer
  * @constructor
- * @param {InputData} data - The data to construct the IOBuffer with.
+ * @param {number|ArrayBufferLike|ArrayBufferView|IOBuffer|Buffer} [data] - The data to construct the IOBuffer with.
  *
- * If it's a number, it will initialize the buffer with the number as the buffer's length<br>
- * If it's undefined, it will initialize the buffer with a default length of 8 Kb<br>
- * If its an ArrayBuffer, a TypedArray, an IOBuffer instance,
- * or a Node.js Buffer, it will create a view over the underlying ArrayBuffer.
+ * If data is a number, it will be the new buffer's length<br>
+ * If data is `undefined`, the buffer will be initialized with a default length of 8Kb<br>
+ * If data is an ArrayBuffer, SharedArrayBuffer, an ArrayBufferView (Typed Array), an IOBuffer instance,
+ * or a Node.js Buffer, a view will be created over the underlying ArrayBuffer.
  * @param {object} [options]
  * @param {number} [options.offset=0] - Ignore the first n bytes of the ArrayBuffer
  * @property {ArrayBuffer} buffer - Reference to the internal ArrayBuffer object
