@@ -1,9 +1,7 @@
-'use strict';
+import { IOBuffer } from '../IOBuffer';
 
-const IOBuffer = require('..');
-
-describe('test toArray', function () {
-  it('from scratch', function () {
+describe('test toArray', () => {
+  it('from scratch', () => {
     const io1 = new IOBuffer();
     expect(io1.toArray().byteLength).toBe(0);
     io1.writeUint32(100);
@@ -21,7 +19,7 @@ describe('test toArray', function () {
     expect(io2.toArray().byteLength).toBe(4);
   });
 
-  it('from value', function () {
+  it('from value', () => {
     {
       const io = new IOBuffer(new ArrayBuffer(7));
       expect(io.toArray().byteLength).toBe(7);
@@ -36,29 +34,6 @@ describe('test toArray', function () {
     {
       const io = new IOBuffer(new IOBuffer(13), { offset: 5 });
       expect(io.toArray().byteLength).toBe(8);
-    }
-  });
-
-  it('getBuffer', function () {
-    {
-      const io = new IOBuffer(new ArrayBuffer(7));
-      const buffer = io.getBuffer();
-      expect(buffer).toBeInstanceOf(Buffer);
-      expect(buffer).toHaveLength(7);
-    }
-
-    {
-      const OldBuffer = global.Buffer;
-      global.Buffer = undefined;
-
-      const io = new IOBuffer(new ArrayBuffer(7));
-      const buffer = io.getBuffer();
-
-      expect(buffer).toBeInstanceOf(Uint8Array);
-      expect(buffer).not.toBeInstanceOf(OldBuffer);
-      expect(buffer).toHaveLength(7);
-
-      global.Buffer = OldBuffer;
     }
   });
 });

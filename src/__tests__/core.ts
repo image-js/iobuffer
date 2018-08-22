@@ -1,18 +1,16 @@
-'use strict';
+import { IOBuffer } from '../IOBuffer';
 
-const IOBuffer = require('..');
-
-describe('core methods', function () {
+describe('core methods', () => {
   let buffer;
-  beforeEach(function () {
+  beforeEach(() => {
     buffer = new IOBuffer();
   });
 
-  it('should start at 0', function () {
+  it('should start at 0', () => {
     expect(buffer.offset).toBe(0);
   });
 
-  it('should report availability', function () {
+  it('should report availability', () => {
     buffer.length = 15;
     expect(buffer.available(15)).toBe(true);
     expect(buffer.available(20)).toBe(false);
@@ -26,7 +24,7 @@ describe('core methods', function () {
     expect(buffer.available(2)).toBe(false);
   });
 
-  it('get/set endianess', function () {
+  it('get/set endianess', () => {
     expect(buffer.littleEndian).toBe(true);
     expect(buffer.isLittleEndian()).toBe(true);
     expect(buffer.isBigEndian()).toBe(false);
@@ -39,7 +37,7 @@ describe('core methods', function () {
     expect(buffer.isBigEndian()).toBe(false);
   });
 
-  it('skip', function () {
+  it('skip', () => {
     buffer.skip();
     expect(buffer.offset).toBe(1);
     buffer.skip();
@@ -49,14 +47,14 @@ describe('core methods', function () {
     expect(buffer.offset).toBe(8);
   });
 
-  it('seek', function () {
+  it('seek', () => {
     buffer.seek(0);
     expect(buffer.offset).toBe(0);
     buffer.seek(12);
     expect(buffer.offset).toBe(12);
   });
 
-  it('mark/reset', function () {
+  it('mark/reset', () => {
     buffer.seek(12);
     buffer.mark();
     buffer.skip(2);
@@ -65,7 +63,7 @@ describe('core methods', function () {
     expect(buffer.offset).toBe(12);
   });
 
-  it('pop and push marks', function () {
+  it('pop and push marks', () => {
     buffer.seek(5);
     buffer.pushMark();
     buffer.seek(10);
@@ -80,20 +78,20 @@ describe('core methods', function () {
     expect(buffer.offset).toBe(12);
     buffer.popMark();
     expect(buffer.offset).toBe(5);
-    expect(function () {
+    expect(() => {
       buffer.popMark();
     }).toThrowError(/Mark stack empty/);
   });
 
-  it('rewind', function () {
+  it('rewind', () => {
     buffer.seek(10);
     buffer.rewind();
     expect(buffer.offset).toBe(0);
   });
 
-  it('is chainable', function () {
+  it('is chainable', () => {
     const io = new IOBuffer();
-    expect(function () {
+    expect(() => {
       io.writeChars('abc')
         .writeUint32(10)
         .writeBoolean(true)
