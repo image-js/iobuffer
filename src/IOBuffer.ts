@@ -3,13 +3,7 @@ import { decode, encode } from 'utf8';
 const defaultByteLength = 1024 * 8;
 const charArray: string[] = [];
 
-type InputData =
-  | undefined
-  | number
-  | ArrayBufferLike
-  | ArrayBufferView
-  | IOBuffer
-  | Buffer;
+type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer | Buffer;
 
 interface IOBufferOptions {
   offset?: number;
