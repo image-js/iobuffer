@@ -1,3 +1,33 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/image-js/iobuffer/compare/v3.2.0...v4.0.0) (2018-08-22)
+
+
+### Bug Fixes
+
+* fix test-travis script ([fd74496](https://github.com/image-js/iobuffer/commit/fd74496))
+* remove implied undefined type from InputData ([0040962](https://github.com/image-js/iobuffer/commit/0040962))
+
+
+### Chores
+
+* remove support for Node 4 ([feabb42](https://github.com/image-js/iobuffer/commit/feabb42))
+
+
+### Features
+
+* convert to TypeScript ([b73c748](https://github.com/image-js/iobuffer/commit/b73c748))
+* remove getBuffer method ([39dbc89](https://github.com/image-js/iobuffer/commit/39dbc89))
+
+
+### BREAKING CHANGES
+
+* The `getBuffer` method has been removed. Use `toArray` instead.
+* The IOBuffer constructor is now a named export. Access it with
+`require('iobuffer').IOBuffer` or `import { IOBuffer } from 'iobuffer'`.
+* Removed support for Node 4
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/image-js/iobuffer/compare/v3.1.0...v3.2.0) (2016-12-27)
 
