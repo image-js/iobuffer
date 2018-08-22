@@ -21,6 +21,12 @@ describe('read data', () => {
     expect(theBuffer).toHaveLength(5);
   });
 
+  it('read too far', () => {
+    buffer.readUint16();
+    buffer.readUint32();
+    expect(() => buffer.readUint32()).toThrow(RangeError);
+  });
+
   it('readBoolean', () => {
     expect(buffer.readBoolean()).toBe(false);
     expect(buffer.readBoolean()).toBe(true);
