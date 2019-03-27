@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>iobuffer</title>
+	<title>&quot;IOBuffer&quot; | iobuffer</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">iobuffer</a>
+					<a href="../index.html" class="title">iobuffer</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,61 +53,102 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="_iobuffer_.html">&quot;IOBuffer&quot;</a>
 				</li>
 			</ul>
-			<h1> iobuffer</h1>
+			<h1>External module &quot;IOBuffer&quot;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="iobuffer">iobuffer</h1>
-				<p><a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/v/iobuffer.svg?style=flat-square" alt="NPM version"></a>
-					<a href="https://travis-ci.org/image-js/iobuffer"><img src="https://img.shields.io/travis/image-js/iobuffer/master.svg?style=flat-square" alt="build status"></a>
-					<a href="https://codecov.io/gh/image-js/iobuffer"><img src="https://img.shields.io/codecov/c/github/image-js/iobuffer.svg?style=flat-square" alt="Test coverage"></a>
-				<a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/dm/iobuffer.svg?style=flat-square" alt="npm download"></a></p>
-				<p>Read and write binary data in ArrayBuffers.</p>
-				<h2 id="installation">Installation</h2>
-				<pre><code class="language-console">npm install iobuffer</code></pre>
-				<h2 id="api">API</h2>
-				<p>Complete <a href="http://image-js.github.io/iobuffer/">API documentation</a></p>
-				<h2 id="usage-example">Usage example</h2>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> { IOBuffer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'iobuffer'</span>);
-
-<span class="hljs-keyword">const</span> io = <span class="hljs-keyword">new</span> IOBuffer();
-<span class="hljs-comment">// Pointer offset is 0</span>
-io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-comment">// Write 11 chars, pointer offset now 11 (-&gt;15)</span>
-  .writeUint32(<span class="hljs-number">42</span>) <span class="hljs-comment">// Write 32-bit int (default is little-endian), pointer offset now 15</span>
-  .setBigEndian() <span class="hljs-comment">// Switch to big-endian mode</span>
-  .writeUint32(<span class="hljs-number">24</span>) <span class="hljs-comment">// Write another 32-bit int, but big-endian, pointer offset now 19</span>
-  .mark() <span class="hljs-comment">// Bookmark current pointer offset (19)</span>
-  .skip(<span class="hljs-number">2</span>) <span class="hljs-comment">// Pointer offset now 21</span>
-  .writeBoolean(<span class="hljs-literal">true</span>) <span class="hljs-comment">// Write 0xff, pointer offset now 22</span>
-  .reset() <span class="hljs-comment">// Go to bookmarked pointer offset, pointer offset now 19</span>
-  .setLittleEndian() <span class="hljs-comment">// Go back to little endian mode</span>
-  .writeUint16(<span class="hljs-number">18</span>) <span class="hljs-comment">// Write 16-bit unsigned integer in the previously skipped 2 bytes, pointer offset now 21</span>
-  .rewind() <span class="hljs-comment">// Pointer offset back to 0</span>
-  .toArray(); <span class="hljs-comment">// Get a Uint8Array over the written part [0-21] of the internal ArrayBuffer</span></code></pre>
-				<h2 id="license">License</h2>
-				<p><a href="./LICENSE">MIT</a></p>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_iobuffer_.iobuffer.html" class="tsd-kind-icon">IOBuffer</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported"><a href="../interfaces/_iobuffer_.iobufferoptions.html" class="tsd-kind-icon">IOBuffer<wbr>Options</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_iobuffer_.html#inputdata" class="tsd-kind-icon">Input<wbr>Data</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_iobuffer_.html#defaultbytelength" class="tsd-kind-icon">default<wbr>Byte<wbr>Length</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="inputdata" class="tsd-anchor"></a>
+					<h3>Input<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">Input<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayBufferLike</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayBufferView</span><span class="tsd-signature-symbol"> | </span><a href="../classes/_iobuffer_.iobuffer.html" class="tsd-signature-type">IOBuffer</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Buffer</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/image-js/iobuffer/blob/bf21dc0/src/IOBuffer.ts#L5">IOBuffer.ts:5</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="defaultbytelength" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> default<wbr>Byte<wbr>Length</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Byte<wbr>Length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1024 * 8</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/image-js/iobuffer/blob/bf21dc0/src/IOBuffer.ts#L3">IOBuffer.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_iobuffer_.html">"IOBuffer"</a>
+					<li class="current tsd-kind-external-module">
+						<a href="_iobuffer_.html">"IOBuffer"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_iobuffer_.iobuffer.html" class="tsd-kind-icon">IOBuffer</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../interfaces/_iobuffer_.iobufferoptions.html" class="tsd-kind-icon">IOBuffer<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_iobuffer_.html#inputdata" class="tsd-kind-icon">Input<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_iobuffer_.html#defaultbytelength" class="tsd-kind-icon">default<wbr>Byte<wbr>Length</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -176,7 +217,7 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

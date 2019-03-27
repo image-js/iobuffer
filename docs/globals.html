@@ -63,42 +63,24 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="iobuffer">iobuffer</h1>
-				<p><a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/v/iobuffer.svg?style=flat-square" alt="NPM version"></a>
-					<a href="https://travis-ci.org/image-js/iobuffer"><img src="https://img.shields.io/travis/image-js/iobuffer/master.svg?style=flat-square" alt="build status"></a>
-					<a href="https://codecov.io/gh/image-js/iobuffer"><img src="https://img.shields.io/codecov/c/github/image-js/iobuffer.svg?style=flat-square" alt="Test coverage"></a>
-				<a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/dm/iobuffer.svg?style=flat-square" alt="npm download"></a></p>
-				<p>Read and write binary data in ArrayBuffers.</p>
-				<h2 id="installation">Installation</h2>
-				<pre><code class="language-console">npm install iobuffer</code></pre>
-				<h2 id="api">API</h2>
-				<p>Complete <a href="http://image-js.github.io/iobuffer/">API documentation</a></p>
-				<h2 id="usage-example">Usage example</h2>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> { IOBuffer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'iobuffer'</span>);
-
-<span class="hljs-keyword">const</span> io = <span class="hljs-keyword">new</span> IOBuffer();
-<span class="hljs-comment">// Pointer offset is 0</span>
-io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-comment">// Write 11 chars, pointer offset now 11 (-&gt;15)</span>
-  .writeUint32(<span class="hljs-number">42</span>) <span class="hljs-comment">// Write 32-bit int (default is little-endian), pointer offset now 15</span>
-  .setBigEndian() <span class="hljs-comment">// Switch to big-endian mode</span>
-  .writeUint32(<span class="hljs-number">24</span>) <span class="hljs-comment">// Write another 32-bit int, but big-endian, pointer offset now 19</span>
-  .mark() <span class="hljs-comment">// Bookmark current pointer offset (19)</span>
-  .skip(<span class="hljs-number">2</span>) <span class="hljs-comment">// Pointer offset now 21</span>
-  .writeBoolean(<span class="hljs-literal">true</span>) <span class="hljs-comment">// Write 0xff, pointer offset now 22</span>
-  .reset() <span class="hljs-comment">// Go to bookmarked pointer offset, pointer offset now 19</span>
-  .setLittleEndian() <span class="hljs-comment">// Go back to little endian mode</span>
-  .writeUint16(<span class="hljs-number">18</span>) <span class="hljs-comment">// Write 16-bit unsigned integer in the previously skipped 2 bytes, pointer offset now 21</span>
-  .rewind() <span class="hljs-comment">// Pointer offset back to 0</span>
-  .toArray(); <span class="hljs-comment">// Get a Uint8Array over the written part [0-21] of the internal ArrayBuffer</span></code></pre>
-				<h2 id="license">License</h2>
-				<p><a href="./LICENSE">MIT</a></p>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>External modules</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-external-module"><a href="modules/_iobuffer_.html" class="tsd-kind-icon">"IOBuffer"</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
+					<li class="globals current ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
