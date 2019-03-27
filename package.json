@@ -13,6 +13,7 @@
     "clean": "rimraf lib lib-esm",
     "eslint": "eslint src --ext ts",
     "eslint-fix": "npm run eslint -- --fix",
+    "prepublishOnly": "npm run tsc",
     "test": "npm run test-coverage && npm run eslint",
     "test-coverage": "npm run test-only -- --coverage",
     "test-only": "jest",
