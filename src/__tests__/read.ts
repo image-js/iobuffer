@@ -103,5 +103,7 @@ describe('read data', () => {
     const str = theBuffer.readUtf8(5);
     expect(str).toBe('42€');
     expect(theBuffer.readByte()).toBe(42);
+    theBuffer.seek(1);
+    expect(theBuffer.readUtf8()).toBe('4');
   });
 });
