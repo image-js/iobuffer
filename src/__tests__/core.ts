@@ -1,7 +1,7 @@
 import { IOBuffer } from '../IOBuffer';
 
 describe('core methods', () => {
-  let buffer;
+  let buffer: IOBuffer;
   beforeEach(() => {
     buffer = new IOBuffer();
   });
@@ -25,15 +25,13 @@ describe('core methods', () => {
   });
 
   it('get/set endianess', () => {
-    expect(buffer.littleEndian).toBe(true);
     expect(buffer.isLittleEndian()).toBe(true);
     expect(buffer.isBigEndian()).toBe(false);
     buffer.setBigEndian();
-    expect(buffer.littleEndian).toBe(false);
     expect(buffer.isLittleEndian()).toBe(false);
     expect(buffer.isBigEndian()).toBe(true);
     buffer.setLittleEndian();
-    expect(buffer.littleEndian).toBe(true);
+    expect(buffer.isLittleEndian()).toBe(true);
     expect(buffer.isBigEndian()).toBe(false);
   });
 
@@ -80,7 +78,7 @@ describe('core methods', () => {
     expect(buffer.offset).toBe(5);
     expect(() => {
       buffer.popMark();
-    }).toThrowError(/Mark stack empty/);
+    }).toThrow(/Mark stack empty/);
   });
 
   it('rewind', () => {
@@ -108,6 +106,6 @@ describe('core methods', () => {
         .setLittleEndian()
         .setBigEndian()
         .reset();
-    }).not.toThrowError();
+    }).not.toThrow();
   });
 });

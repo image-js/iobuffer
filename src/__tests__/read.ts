@@ -2,7 +2,7 @@ import { IOBuffer } from '../IOBuffer';
 
 describe('read data', () => {
   const data = new Uint32Array([0xff00ff00, 0x00ff00ff]);
-  let buffer;
+  let buffer: IOBuffer;
   beforeEach(() => {
     buffer = new IOBuffer(data);
   });
@@ -50,8 +50,8 @@ describe('read data', () => {
     expect(buffer.readUint8()).toBe(255);
     expect(buffer.readByte()).toBe(0);
     expect(buffer.readByte()).toBe(255);
-    expect(Array.from(buffer.readBytes())).toEqual([255]);
-    expect(Array.from(buffer.readBytes(3))).toEqual([0, 255, 0]);
+    expect(Array.from(buffer.readBytes())).toStrictEqual([255]);
+    expect(Array.from(buffer.readBytes(3))).toStrictEqual([0, 255, 0]);
   });
 
   it('readInt16', () => {

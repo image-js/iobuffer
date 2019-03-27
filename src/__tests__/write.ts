@@ -1,12 +1,15 @@
+/* eslint jest/expect-expect: ["error", { "assertFunctionNames": ["expect", "check"] }] */
+
 import { IOBuffer } from '../IOBuffer';
 
 describe('write data', () => {
-  let buffer;
+  let buffer: IOBuffer;
   beforeEach(() => {
     buffer = new IOBuffer(16);
   });
 
   it('writeBoolean', () => {
+    // @ts-ignore
     buffer.writeBoolean();
     buffer.writeBoolean(true);
     buffer.writeBoolean(false);
@@ -117,13 +120,16 @@ describe('write data', () => {
     theBuffer.writeByte(42);
     const uint8 = theBuffer.toArray();
     expect(uint8).toHaveLength(7);
-    expect(uint8).toEqual(Uint8Array.of(42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42));
+    expect(uint8).toStrictEqual(
+      Uint8Array.of(42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42)
+    );
   });
 });
 
 const good = new Uint8Array(new Uint32Array([0xff00ff00, 0x00ff00ff]).buffer);
-function check(buffer) {
+
+function check(buffer: IOBuffer): void {
   expect(buffer).toHaveLength(16);
   const ta = buffer.toArray();
-  expect(ta).toEqual(good);
+  expect(ta).toStrictEqual(good);
 }

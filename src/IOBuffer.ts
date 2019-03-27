@@ -1,45 +1,58 @@
 import { decode, encode } from 'utf8';
 
 const defaultByteLength = 1024 * 8;
-const charArray: string[] = [];
 
 type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer | Buffer;
 
 interface IOBufferOptions {
+  /**
+   * Ignore the first n bytes of the ArrayBuffer.
+   */
   offset?: number;
 }
 
-/**
- * IOBuffer
- * @constructor
- * @param {number|ArrayBufferLike|ArrayBufferView|IOBuffer|Buffer} [data] - The data to construct the IOBuffer with.
- *
- * If data is a number, it will be the new buffer's length<br>
- * If data is `undefined`, the buffer will be initialized with a default length of 8Kb<br>
- * If data is an ArrayBuffer, SharedArrayBuffer, an ArrayBufferView (Typed Array), an IOBuffer instance,
- * or a Node.js Buffer, a view will be created over the underlying ArrayBuffer.
- * @param {object} [options]
- * @param {number} [options.offset=0] - Ignore the first n bytes of the ArrayBuffer
- * @property {ArrayBuffer} buffer - Reference to the internal ArrayBuffer object
- * @property {number} length - Byte length of the internal ArrayBuffer
- * @property {number} offset - The current offset of the buffer's pointer
- * @property {number} byteLength - Byte length of the internal ArrayBuffer
- * @property {number} byteOffset - Byte offset of the internal ArrayBuffer
- */
 export class IOBuffer {
+  /**
+   * Reference to the internal ArrayBuffer object.
+   */
   public buffer: ArrayBufferLike;
+
+  /**
+   * Byte length of the internal ArrayBuffer.
+   */
   public byteLength: number;
+
+  /**
+   * Byte offset of the internal ArrayBuffer.
+   */
   public byteOffset: number;
-  public lastWrittenByte: number;
+
+  /**
+   * Byte length of the internal ArrayBuffer.
+   */
   public length: number;
-  public littleEndian: boolean;
+
+  /**
+   * The current offset of the buffer's pointer.
+   */
   public offset: number;
+
+  private lastWrittenByte: number;
+  private littleEndian: boolean;
 
   private _data: DataView;
   private _mark: number;
   private _marks: number[];
 
-  constructor(
+  /**
+   * @param data - The data to construct the IOBuffer with.
+   * If data is a number, it will be the new buffer's length<br>
+   * If data is `undefined`, the buffer will be initialized with a default length of 8Kb<br>
+   * If data is an ArrayBuffer, SharedArrayBuffer, an ArrayBufferView (Typed Array), an IOBuffer instance,
+   * or a Node.js Buffer, a view will be created over the underlying ArrayBuffer.
+   * @param options
+   */
+  public constructor(
     data: InputData = defaultByteLength,
     options: IOBufferOptions = {}
   ) {
@@ -77,64 +90,62 @@ export class IOBuffer {
   }
 
   /**
-   * Checks if the memory allocated to the buffer is sufficient to store more bytes after the offset
-   * @param {number} [byteLength=1] The needed memory in bytes
-   * @return {boolean} Returns true if there is sufficient space and false otherwise
+   * Checks if the memory allocated to the buffer is sufficient to store more
+   * bytes after the offset.
+   * @param byteLength - The needed memory in bytes.
+   * @returns `true` if there is sufficient space and `false` otherwise.
    */
   public available(byteLength: number = 1): boolean {
     return this.offset + byteLength <= this.length;
   }
 
   /**
-   * Check if little-endian mode is used for reading and writing multi-byte values
-   * @return {boolean} Returns true if little-endian mode is used, false otherwise
+   * Check if little-endian mode is used for reading and writing multi-byte
+   * values.
+   * @returns `true` if little-endian mode is used, `false` otherwise.
    */
   public isLittleEndian(): boolean {
     return this.littleEndian;
   }
 
   /**
-   * Set little-endian mode for reading and writing multi-byte values
-   * @return {IOBuffer}
+   * Set little-endian mode for reading and writing multi-byte values.
    */
-  public setLittleEndian(): IOBuffer {
+  public setLittleEndian(): this {
     this.littleEndian = true;
     return this;
   }
 
   /**
-   * Check if big-endian mode is used for reading and writing multi-byte values
-   * @return {boolean} Returns true if big-endian mode is used, false otherwise
+   * Check if big-endian mode is used for reading and writing multi-byte values.
+   * @returns `true` if big-endian mode is used, `false` otherwise.
    */
   public isBigEndian(): boolean {
     return !this.littleEndian;
   }
 
   /**
-   * Switches to big-endian mode for reading and writing multi-byte values
-   * @return {IOBuffer}
+   * Switches to big-endian mode for reading and writing multi-byte values.
    */
-  public setBigEndian(): IOBuffer {
+  public setBigEndian(): this {
     this.littleEndian = false;
     return this;
   }
 
   /**
-   * Move the pointer n bytes forward
-   * @param {number} n
-   * @return {IOBuffer}
+   * Move the pointer n bytes forward.
+   * @param n - Number of bytes to skip.
    */
-  public skip(n: number = 1): IOBuffer {
+  public skip(n: number = 1): this {
     this.offset += n;
     return this;
   }
 
   /**
-   * Move the pointer to the given offset
-   * @param {number} offset
-   * @return {IOBuffer}
+   * Move the pointer to the given offset.
+   * @param offset
    */
-  public seek(offset: number): IOBuffer {
+  public seek(offset: number): this {
     this.offset = offset;
     return this;
   }
@@ -142,39 +153,36 @@ export class IOBuffer {
   /**
    * Store the current pointer offset.
    * @see {@link IOBuffer#reset}
-   * @return {IOBuffer}
    */
-  public mark(): IOBuffer {
+  public mark(): this {
     this._mark = this.offset;
     return this;
   }
 
   /**
-   * Move the pointer back to the last pointer offset set by mark
+   * Move the pointer back to the last pointer offset set by mark.
    * @see {@link IOBuffer#mark}
-   * @return {IOBuffer}
    */
-  public reset(): IOBuffer {
+  public reset(): this {
     this.offset = this._mark;
     return this;
   }
 
   /**
-   * Push the current pointer offset to the mark stack
+   * Push the current pointer offset to the mark stack.
    * @see {@link IOBuffer#popMark}
-   * @return {IOBuffer}
    */
-  public pushMark(): IOBuffer {
+  public pushMark(): this {
     this._marks.push(this.offset);
     return this;
   }
 
   /**
-   * Pop the last pointer offset from the mark stack, and set the current pointer offset to the popped value
+   * Pop the last pointer offset from the mark stack, and set the current
+   * pointer offset to the popped value.
    * @see {@link IOBuffer#pushMark}
-   * @return {IOBuffer}
    */
-  public popMark(): IOBuffer {
+  public popMark(): this {
     const offset = this._marks.pop();
     if (offset === undefined) {
       throw new Error('Mark stack empty');
@@ -184,22 +192,21 @@ export class IOBuffer {
   }
 
   /**
-   * Move the pointer offset back to 0
-   * @return {IOBuffer}
+   * Move the pointer offset back to 0.
    */
-  public rewind(): IOBuffer {
+  public rewind(): this {
     this.offset = 0;
     return this;
   }
 
   /**
-   * Make sure the buffer has sufficient memory to write a given byteLength at the current pointer offset
-   * If the buffer's memory is insufficient, this method will create a new buffer (a copy) with a length
-   * that is twice (byteLength + current offset)
-   * @param {number} [byteLength = 1]
-   * @return {IOBuffer}
+   * Make sure the buffer has sufficient memory to write a given byteLength at
+   * the current pointer offset.
+   * If the buffer's memory is insufficient, this method will create a new
+   * buffer (a copy) with a length that is twice (byteLength + current offset).
+   * @param byteLength
    */
-  public ensureAvailable(byteLength: number = 1): IOBuffer {
+  public ensureAvailable(byteLength: number = 1): this {
     if (!this.available(byteLength)) {
       const lengthNeeded = this.offset + byteLength;
       const newLength = lengthNeeded * 2;
@@ -213,42 +220,36 @@ export class IOBuffer {
   }
 
   /**
-   * Read a byte and return false if the byte's value is 0, or true otherwise
-   * Moves pointer forward
-   * @return {boolean}
+   * Read a byte and return false if the byte's value is 0, or true otherwise.
+   * Moves pointer forward by one byte.
    */
   public readBoolean(): boolean {
     return this.readUint8() !== 0;
   }
 
   /**
-   * Read a signed 8-bit integer and move pointer forward
-   * @return {number}
+   * Read a signed 8-bit integer and move pointer forward by 1 byte.
    */
   public readInt8(): number {
     return this._data.getInt8(this.offset++);
   }
 
   /**
-   * Read an unsigned 8-bit integer and move pointer forward
-   * @return {number}
+   * Read an unsigned 8-bit integer and move pointer forward by 1 byte.
    */
   public readUint8(): number {
     return this._data.getUint8(this.offset++);
   }
 
   /**
-   * Alias for {@link IOBuffer#readUint8}
-   * @return {number}
+   * Alias for {@link IOBuffer#readUint8}.
    */
   public readByte(): number {
     return this.readUint8();
   }
 
   /**
-   * Read n bytes and move pointer forward.
-   * @param {number} n
-   * @return {Uint8Array}
+   * Read `n` bytes and move pointer forward by `n` bytes.
    */
   public readBytes(n: number = 1): Uint8Array {
     const bytes = new Uint8Array(n);
@@ -259,8 +260,7 @@ export class IOBuffer {
   }
 
   /**
-   * Read a 16-bit signed integer and move pointer forward
-   * @return {number}
+   * Read a 16-bit signed integer and move pointer forward by 2 bytes.
    */
   public readInt16(): number {
     const value = this._data.getInt16(this.offset, this.littleEndian);
@@ -269,8 +269,7 @@ export class IOBuffer {
   }
 
   /**
-   * Read a 16-bit unsigned integer and move pointer forward
-   * @return {number}
+   * Read a 16-bit unsigned integer and move pointer forward by 2 bytes.
    */
   public readUint16(): number {
     const value = this._data.getUint16(this.offset, this.littleEndian);
@@ -279,8 +278,7 @@ export class IOBuffer {
   }
 
   /**
-   * Read a 32-bit signed integer and move pointer forward
-   * @return {number}
+   * Read a 32-bit signed integer and move pointer forward by 4 bytes.
    */
   public readInt32(): number {
     const value = this._data.getInt32(this.offset, this.littleEndian);
@@ -289,8 +287,7 @@ export class IOBuffer {
   }
 
   /**
-   * Read a 32-bit unsigned integer and move pointer forward
-   * @return {number}
+   * Read a 32-bit unsigned integer and move pointer forward by 4 bytes.
    */
   public readUint32(): number {
     const value = this._data.getUint32(this.offset, this.littleEndian);
@@ -299,8 +296,7 @@ export class IOBuffer {
   }
 
   /**
-   * Read a 32-bit floating number and move pointer forward
-   * @return {number}
+   * Read a 32-bit floating number and move pointer forward by 4 bytes.
    */
   public readFloat32(): number {
     const value = this._data.getFloat32(this.offset, this.littleEndian);
@@ -309,8 +305,7 @@ export class IOBuffer {
   }
 
   /**
-   * Read a 64-bit floating number and move pointer forward
-   * @return {number}
+   * Read a 64-bit floating number and move pointer forward by 8 bytes.
    */
   public readFloat64(): number {
     const value = this._data.getFloat64(this.offset, this.littleEndian);
@@ -319,30 +314,26 @@ export class IOBuffer {
   }
 
   /**
-   * Read 1-byte ascii character and move pointer forward
-   * @return {string}
+   * Read a 1-byte ASCII character and move pointer forward by 1 byte.
    */
   public readChar(): string {
     return String.fromCharCode(this.readInt8());
   }
 
   /**
-   * Read n 1-byte ascii characters and move pointer forward
-   * @param {number} n
-   * @return {string}
+   * Read `n` 1-byte ASCII characters and move pointer forward by `n` bytes.
    */
   public readChars(n: number = 1): string {
-    charArray.length = n;
+    let result = '';
     for (let i = 0; i < n; i++) {
-      charArray[i] = this.readChar();
+      result += this.readChar();
     }
-    return charArray.join('');
+    return result;
   }
 
   /**
-   * Read the next n bytes, return a UTF-8 decoded string and move pointer forward
-   * @param {number} n
-   * @return {string}
+   * Read the next `n` bytes, return a UTF-8 decoded string and move pointer
+   * forward by `n` bytes.
    */
   public readUtf8(n: number = 1): string {
     const bString = this.readChars(n);
@@ -350,21 +341,18 @@ export class IOBuffer {
   }
 
   /**
-   * Write 0xff if the passed value is truthy, 0x00 otherwise
-   * @param {any} value
-   * @return {IOBuffer}
+   * Write 0xff if the passed value is truthy, 0x00 otherwise and move pointer
+   * forward by 1 byte.
    */
-  public writeBoolean(value: any): IOBuffer {
+  public writeBoolean(value: unknown): this {
     this.writeUint8(value ? 0xff : 0x00);
     return this;
   }
 
   /**
-   * Write value as an 8-bit signed integer
-   * @param {number} value
-   * @return {IOBuffer}
+   * Write `value` as an 8-bit signed integer and move pointer forward by 1 byte.
    */
-  public writeInt8(value: number): IOBuffer {
+  public writeInt8(value: number): this {
     this.ensureAvailable(1);
     this._data.setInt8(this.offset++, value);
     this._updateLastWrittenByte();
@@ -372,11 +360,10 @@ export class IOBuffer {
   }
 
   /**
-   * Write value as a 8-bit unsigned integer
-   * @param {number} value
-   * @return {IOBuffer}
+   * Write `value` as an 8-bit unsigned integer and move pointer forward by 1
+   * byte.
    */
-  public writeUint8(value: number): IOBuffer {
+  public writeUint8(value: number): this {
     this.ensureAvailable(1);
     this._data.setUint8(this.offset++, value);
     this._updateLastWrittenByte();
@@ -384,22 +371,18 @@ export class IOBuffer {
   }
 
   /**
-   * An alias for {@link IOBuffer#writeUint8}
-   * @param {number} value
-   * @return {IOBuffer}
+   * An alias for {@link IOBuffer#writeUint8}.
    */
-  public writeByte(value: number): IOBuffer {
+  public writeByte(value: number): this {
     return this.writeUint8(value);
   }
 
   /**
-   * Write bytes
-   * @param {ArrayLike<number>} bytes
-   * @return {IOBuffer}
+   * Write all elements of `bytes` as uint8 values and move pointer forward by
+   * `bytes.length` bytes.
    */
-  public writeBytes(bytes: ArrayLike<number>): IOBuffer {
+  public writeBytes(bytes: ArrayLike<number>): this {
     this.ensureAvailable(bytes.length);
-    // tslint:disable-next-line prefer-for-of
     for (let i = 0; i < bytes.length; i++) {
       this._data.setUint8(this.offset++, bytes[i]);
     }
@@ -408,11 +391,10 @@ export class IOBuffer {
   }
 
   /**
-   * Write value as an 16-bit signed integer
-   * @param {number} value
-   * @return {IOBuffer}
+   * Write `value` as a 16-bit signed integer and move pointer forward by 2
+   * bytes.
    */
-  public writeInt16(value: number): IOBuffer {
+  public writeInt16(value: number): this {
     this.ensureAvailable(2);
     this._data.setInt16(this.offset, value, this.littleEndian);
     this.offset += 2;
@@ -421,11 +403,10 @@ export class IOBuffer {
   }
 
   /**
-   * Write value as a 16-bit unsigned integer
-   * @param {number} value
-   * @return {IOBuffer}
+   * Write `value` as a 16-bit unsigned integer and move pointer forward by 2
+   * bytes.
    */
-  public writeUint16(value: number): IOBuffer {
+  public writeUint16(value: number): this {
     this.ensureAvailable(2);
     this._data.setUint16(this.offset, value, this.littleEndian);
     this.offset += 2;
@@ -434,11 +415,10 @@ export class IOBuffer {
   }
 
   /**
-   * Write a 32-bit signed integer at the current pointer offset
-   * @param {number} value
-   * @return {IOBuffer}
+   * Write `value` as a 32-bit signed integer and move pointer forward by 4
+   * bytes.
    */
-  public writeInt32(value: number): IOBuffer {
+  public writeInt32(value: number): this {
     this.ensureAvailable(4);
     this._data.setInt32(this.offset, value, this.littleEndian);
     this.offset += 4;
@@ -447,11 +427,10 @@ export class IOBuffer {
   }
 
   /**
-   * Write a 32-bit unsigned integer at the current pointer offset
-   * @param {number} value - The value to set
-   * @return {IOBuffer}
+   * Write `value` as a 32-bit unsigned integer and move pointer forward by 4
+   * bytes.
    */
-  public writeUint32(value: number): IOBuffer {
+  public writeUint32(value: number): this {
     this.ensureAvailable(4);
     this._data.setUint32(this.offset, value, this.littleEndian);
     this.offset += 4;
@@ -460,11 +439,10 @@ export class IOBuffer {
   }
 
   /**
-   * Write a 32-bit floating number at the current pointer offset
-   * @param {number} value - The value to set
-   * @return {IOBuffer}
+   * Write `value` as a 32-bit floating number and move pointer forward by 4
+   * bytes.
    */
-  public writeFloat32(value: number): IOBuffer {
+  public writeFloat32(value: number): this {
     this.ensureAvailable(4);
     this._data.setFloat32(this.offset, value, this.littleEndian);
     this.offset += 4;
@@ -473,11 +451,10 @@ export class IOBuffer {
   }
 
   /**
-   * Write a 64-bit floating number at the current pointer offset
-   * @param {number} value
-   * @return {IOBuffer}
+   * Write `value` as a 64-bit floating number and move pointer forward by 8
+   * bytes.
    */
-  public writeFloat64(value: number): IOBuffer {
+  public writeFloat64(value: number): this {
     this.ensureAvailable(8);
     this._data.setFloat64(this.offset, value, this.littleEndian);
     this.offset += 8;
@@ -486,20 +463,18 @@ export class IOBuffer {
   }
 
   /**
-   * Write the charCode of the passed string's first character to the current pointer offset
-   * @param {string} str - The character to set
-   * @return {IOBuffer}
+   * Write the charCode of `str`'s first character as an 8-bit unsigned integer
+   * and move pointer forward by 1 byte.
    */
-  public writeChar(str: string): IOBuffer {
+  public writeChar(str: string): this {
     return this.writeUint8(str.charCodeAt(0));
   }
 
   /**
-   * Write the charCodes of the passed string's characters to the current pointer offset
-   * @param {string} str
-   * @return {IOBuffer}
+   * Write the charCodes of all `str`'s characters as 8-bit unsigned integers
+   * and move pointer forward by `str.length` bytes.
    */
-  public writeChars(str: string): IOBuffer {
+  public writeChars(str: string): this {
     for (let i = 0; i < str.length; i++) {
       this.writeUint8(str.charCodeAt(i));
     }
@@ -507,11 +482,10 @@ export class IOBuffer {
   }
 
   /**
-   * UTF-8 encode and write the passed string to the current pointer offset
-   * @param {string} str
-   * @return {IOBuffer}
+   * UTF-8 encode and write `str` to the current pointer offset and move pointer
+   * forward according to the encoded length.
    */
-  public writeUtf8(str: string): IOBuffer {
+  public writeUtf8(str: string): this {
     const bString = encode(str);
     return this.writeChars(bString);
   }
@@ -520,7 +494,6 @@ export class IOBuffer {
    * Export a Uint8Array view of the internal buffer.
    * The view starts at the byte offset and its length
    * is calculated to stop at the last written byte or the original length.
-   * @return {Uint8Array}
    */
   public toArray(): Uint8Array {
     return new Uint8Array(this.buffer, this.byteOffset, this.lastWrittenByte);
@@ -530,7 +503,7 @@ export class IOBuffer {
    * Update the last written byte offset
    * @private
    */
-  private _updateLastWrittenByte() {
+  private _updateLastWrittenByte(): void {
     if (this.offset > this.lastWrittenByte) {
       this.lastWrittenByte = this.offset;
     }

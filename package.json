@@ -3,23 +3,23 @@
   "version": "4.0.0",
   "description": "Read and write binary data on ArrayBuffers",
   "main": "./lib/IOBuffer.js",
-  "module": "./lib-es6/IOBuffer.js",
+  "module": "./lib-esm/IOBuffer.js",
   "types": "./lib/IOBuffer.d.ts",
   "files": [
     "lib",
-    "lib-es6"
+    "lib-esm"
   ],
   "scripts": {
-    "clean": "rimraf lib lib-es6",
-    "test": "npm run test-only && npm run tslint",
+    "clean": "rimraf lib lib-esm",
+    "eslint": "eslint src --ext ts",
+    "eslint-fix": "npm run eslint -- --fix",
+    "test": "npm run test-only && npm run eslint",
     "test-coverage": "npm run test-only -- --coverage",
     "test-only": "jest",
-    "test-travis": "npm run test-coverage && npm run tslint",
-    "tsc": "npm run clean && npm run tsc-es5 && npm run tsc-es6",
-    "tsc-es5": "tsc",
-    "tsc-es6": "tsc --project tsconfig.es6.json",
-    "tslint": "tslint --project tsconfig.base.json",
-    "tslint-fix": "npm run tslint -- --fix"
+    "test-travis": "npm run test-coverage && npm run eslint",
+    "tsc": "npm run clean && npm run tsc-cjs && npm run tsc-esm",
+    "tsc-cjs": "tsc",
+    "tsc-esm": "tsc --project tsconfig.esm.json"
   },
   "repository": {
     "type": "git",
@@ -32,29 +32,23 @@
   },
   "homepage": "https://github.com/image-js/iobuffer#readme",
   "jest": {
-    "testEnvironment": "node",
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.1",
-    "@types/node": "^10.7.1",
-    "jest": "^23.5.0",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^23.1.4",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.0.1"
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.12.0",
+    "@typescript-eslint/eslint-plugin": "^1.5.0",
+    "@typescript-eslint/parser": "^1.5.0",
+    "eslint": "^5.15.3",
+    "eslint-config-cheminfo": "^1.20.1",
+    "eslint-config-cheminfo-typescript": "^3.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.4.1",
+    "jest": "^24.5.0",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.4000"
   },
   "dependencies": {
     "@types/utf8": "^2.1.6",
