@@ -121,7 +121,7 @@ describe('write data', () => {
     const uint8 = theBuffer.toArray();
     expect(uint8).toHaveLength(7);
     expect(uint8).toStrictEqual(
-      Uint8Array.of(42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42)
+      Uint8Array.of(42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42),
     );
   });
 });

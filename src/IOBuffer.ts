@@ -54,7 +54,7 @@ export class IOBuffer {
    */
   public constructor(
     data: InputData = defaultByteLength,
-    options: IOBufferOptions = {}
+    options: IOBufferOptions = {},
   ) {
     let dataIsGiven = false;
     if (typeof data === 'number') {
@@ -95,7 +95,7 @@ export class IOBuffer {
    * @param byteLength - The needed memory in bytes.
    * @returns `true` if there is sufficient space and `false` otherwise.
    */
-  public available(byteLength: number = 1): boolean {
+  public available(byteLength = 1): boolean {
     return this.offset + byteLength <= this.length;
   }
 
@@ -136,7 +136,7 @@ export class IOBuffer {
    * Move the pointer n bytes forward.
    * @param n - Number of bytes to skip.
    */
-  public skip(n: number = 1): this {
+  public skip(n = 1): this {
     this.offset += n;
     return this;
   }
@@ -206,7 +206,7 @@ export class IOBuffer {
    * buffer (a copy) with a length that is twice (byteLength + current offset).
    * @param byteLength
    */
-  public ensureAvailable(byteLength: number = 1): this {
+  public ensureAvailable(byteLength = 1): this {
     if (!this.available(byteLength)) {
       const lengthNeeded = this.offset + byteLength;
       const newLength = lengthNeeded * 2;
@@ -251,7 +251,7 @@ export class IOBuffer {
   /**
    * Read `n` bytes and move pointer forward by `n` bytes.
    */
-  public readBytes(n: number = 1): Uint8Array {
+  public readBytes(n = 1): Uint8Array {
     const bytes = new Uint8Array(n);
     for (let i = 0; i < n; i++) {
       bytes[i] = this.readByte();
@@ -323,7 +323,7 @@ export class IOBuffer {
   /**
    * Read `n` 1-byte ASCII characters and move pointer forward by `n` bytes.
    */
-  public readChars(n: number = 1): string {
+  public readChars(n = 1): string {
     let result = '';
     for (let i = 0; i < n; i++) {
       result += this.readChar();
@@ -335,7 +335,7 @@ export class IOBuffer {
    * Read the next `n` bytes, return a UTF-8 decoded string and move pointer
    * forward by `n` bytes.
    */
-  public readUtf8(n: number = 1): string {
+  public readUtf8(n = 1): string {
     const bString = this.readChars(n);
     return decode(bString);
   }

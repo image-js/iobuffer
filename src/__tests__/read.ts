@@ -97,7 +97,7 @@ describe('read data', () => {
 
   it('readUtf8', () => {
     const theBuffer = new IOBuffer(
-      Buffer.from([42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42])
+      Buffer.from([42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42]),
     );
     expect(theBuffer.readByte()).toBe(42);
     const str = theBuffer.readUtf8(5);
