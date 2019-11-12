@@ -4,7 +4,8 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "strict": true,
-    "target": "esnext"
+    "target": "esnext",
+    "allowJs": true
   },
   "include": ["./src/**/*"]
 }
