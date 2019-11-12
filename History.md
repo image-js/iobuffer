@@ -1,3 +1,17 @@
+# [5.0.0](https://github.com/image-js/iobuffer/compare/v4.0.1...v5.0.0) (2019-11-12)
+
+
+### chore
+
+* update dependencies ([b7f51b8](https://github.com/image-js/iobuffer/commit/b7f51b8b5ca82f6d16e91273e0198f9650207acb))
+
+
+### BREAKING CHANGES
+
+* Node.js 6 and 8 are no longer supported.
+
+
+
 ## [4.0.1](https://github.com/image-js/iobuffer/compare/v4.0.0...v4.0.1) (2019-03-27)
 
 
