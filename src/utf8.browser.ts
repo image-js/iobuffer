@@ -1,4 +1,4 @@
-import 'text-encoding';
+import './text-encoding-polyfill';
 
 const decoder = new TextDecoder('utf-8');
 
