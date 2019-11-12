@@ -5,6 +5,9 @@
   "main": "./lib/IOBuffer.js",
   "module": "./lib-esm/IOBuffer.js",
   "types": "./lib/IOBuffer.d.ts",
+  "browser": {
+    "./lib-esm/utf8.js": "./lib-esm/utf8.browser.js"
+  },
   "files": [
     "src",
     "lib",
@@ -59,8 +62,7 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@types/utf8": "^2.1.6",
-    "utf8": "^3.0.0"
+    "text-encoding": "^0.7.0"
   },
   "prettier": {
     "arrowParens": "always",

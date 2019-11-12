@@ -1,4 +1,4 @@
-import { decode, encode } from 'utf8';
+import { decode, encode } from './utf8';
 
 const defaultByteLength = 1024 * 8;
 
@@ -336,8 +336,7 @@ export class IOBuffer {
    * forward by `n` bytes.
    */
   public readUtf8(n = 1): string {
-    const bString = this.readChars(n);
-    return decode(bString);
+    return decode(this.readBytes(n));
   }
 
   /**
@@ -486,8 +485,7 @@ export class IOBuffer {
    * forward according to the encoded length.
    */
   public writeUtf8(str: string): this {
-    const bString = encode(str);
-    return this.writeChars(bString);
+    return this.writeBytes(encode(str));
   }
 
   /**
