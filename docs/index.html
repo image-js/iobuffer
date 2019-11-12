@@ -64,17 +64,25 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="iobuffer">iobuffer</h1>
+				<a href="#iobuffer" id="iobuffer" style="color: inherit; text-decoration: none;">
+					<h1>iobuffer</h1>
+				</a>
 				<p><a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/v/iobuffer.svg?style=flat-square" alt="NPM version"></a>
 					<a href="https://travis-ci.org/image-js/iobuffer"><img src="https://img.shields.io/travis/image-js/iobuffer/master.svg?style=flat-square" alt="build status"></a>
 					<a href="https://codecov.io/gh/image-js/iobuffer"><img src="https://img.shields.io/codecov/c/github/image-js/iobuffer.svg?style=flat-square" alt="Test coverage"></a>
 				<a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/dm/iobuffer.svg?style=flat-square" alt="npm download"></a></p>
 				<p>Read and write binary data in ArrayBuffers.</p>
-				<h2 id="installation">Installation</h2>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
 				<pre><code class="language-console">npm install iobuffer</code></pre>
-				<h2 id="api">API</h2>
-				<p>Complete <a href="http://image-js.github.io/iobuffer/">API documentation</a></p>
-				<h2 id="usage-example">Usage example</h2>
+				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+					<h2>API</h2>
+				</a>
+				<p>Complete <a href="https://image-js.github.io/iobuffer/classes/_iobuffer_.iobuffer.html">API documentation</a></p>
+				<a href="#usage-example" id="usage-example" style="color: inherit; text-decoration: none;">
+					<h2>Usage example</h2>
+				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">const</span> { IOBuffer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'iobuffer'</span>);
 
 <span class="hljs-keyword">const</span> io = <span class="hljs-keyword">new</span> IOBuffer();
@@ -91,7 +99,9 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
   .writeUint16(<span class="hljs-number">18</span>) <span class="hljs-comment">// Write 16-bit unsigned integer in the previously skipped 2 bytes, pointer offset now 21</span>
   .rewind() <span class="hljs-comment">// Pointer offset back to 0</span>
   .toArray(); <span class="hljs-comment">// Get a Uint8Array over the written part [0-21] of the internal ArrayBuffer</span></code></pre>
-				<h2 id="license">License</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
 				<p><a href="./LICENSE">MIT</a></p>
 			</div>
 		</div>
@@ -101,8 +111,17 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_iobuffer_.html">"IOBuffer"</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_utf8_.html">"utf8"</a>
 					</li>
 				</ul>
 			</nav>
@@ -125,6 +144,7 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -173,7 +193,7 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
