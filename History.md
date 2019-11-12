@@ -1,3 +1,12 @@
+## [5.0.2](https://github.com/image-js/iobuffer/compare/v5.0.1...v5.0.2) (2019-11-12)
+
+
+### Bug Fixes
+
+* include js file in the build ([3be165a](https://github.com/image-js/iobuffer/commit/3be165a05da7c7287c87cd17da87e2ab9549baf8))
+
+
+
 ## [5.0.1](https://github.com/image-js/iobuffer/compare/v5.0.0...v5.0.1) (2019-11-12)
 
 
