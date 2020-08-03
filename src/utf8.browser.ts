@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unassigned-import
 import './text-encoding-polyfill';
 
 const decoder = new TextDecoder('utf-8');

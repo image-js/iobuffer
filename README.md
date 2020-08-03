@@ -1,7 +1,7 @@
 # iobuffer
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
+[![build status][ci-image]][ci-url]
 [![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
 
@@ -10,7 +10,7 @@ Read and write binary data in ArrayBuffers.
 ## Installation
 
 ```console
-npm install iobuffer
+npm i iobuffer
 ```
 
 ## API
@@ -24,7 +24,7 @@ const { IOBuffer } = require('iobuffer');
 
 const io = new IOBuffer();
 // Pointer offset is 0
-io.writeChars('Hello world') // Write 11 chars, pointer offset now 11 (->15)
+io.writeChars('Hello world') // Write 11 chars, pointer offset now 11
   .writeUint32(42) // Write 32-bit int (default is little-endian), pointer offset now 15
   .setBigEndian() // Switch to big-endian mode
   .writeUint32(24) // Write another 32-bit int, but big-endian, pointer offset now 19
@@ -42,11 +42,11 @@ io.writeChars('Hello world') // Write 11 chars, pointer offset now 11 (->15)
 
 [MIT](./LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/iobuffer.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/iobuffer.svg
 [npm-url]: https://www.npmjs.com/package/iobuffer
-[travis-image]: https://img.shields.io/travis/image-js/iobuffer/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/image-js/iobuffer
-[codecov-image]: https://img.shields.io/codecov/c/github/image-js/iobuffer.svg?style=flat-square
+[ci-image]: https://github.com/image-js/iobuffer/workflows/Node.js%20CI/badge.svg?branch=master
+[ci-url]: https://github.com/image-js/iobuffer/actions?query=workflow%3A%22Node.js+CI%22
+[codecov-image]: https://img.shields.io/codecov/c/github/image-js/iobuffer.svg
 [codecov-url]: https://codecov.io/gh/image-js/iobuffer
-[download-image]: https://img.shields.io/npm/dm/iobuffer.svg?style=flat-square
+[download-image]: https://img.shields.io/npm/dm/iobuffer.svg
 [download-url]: https://www.npmjs.com/package/iobuffer
