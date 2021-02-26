@@ -6,7 +6,8 @@
   "module": "./lib-esm/IOBuffer.js",
   "types": "./lib/IOBuffer.d.ts",
   "browser": {
-    "./lib-esm/utf8.js": "./lib-esm/utf8.browser.js"
+    "./lib-esm/utf8.js": "./lib-esm/utf8.browser.js",
+    "./lib/utf8.js": "./lib/utf8.browser.js"
   },
   "files": [
     "src",
