@@ -1,3 +1,10 @@
+### [5.0.3](https://github.com/image-js/iobuffer/compare/v5.0.2...v5.0.3) (2021-02-26)
+
+
+### Bug Fixes
+
+* add browser field for lib/ version too ([#43](https://github.com/image-js/iobuffer/issues/43)) ([508083f](https://github.com/image-js/iobuffer/commit/508083f9ea2288df57992d1659cfe78e0b751a38))
+
 ## [5.0.2](https://github.com/image-js/iobuffer/compare/v5.0.1...v5.0.2) (2019-11-12)
 
 
