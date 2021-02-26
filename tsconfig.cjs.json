@@ -3,7 +3,8 @@
   "compilerOptions": {
     "module": "commonjs",
     "outDir": "lib",
-    "declaration": true
+    "declaration": true,
+    "noEmit": false
   },
   "exclude": ["./src/**/__tests__"]
 }

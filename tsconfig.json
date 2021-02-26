@@ -5,7 +5,8 @@
     "sourceMap": true,
     "strict": true,
     "target": "esnext",
-    "allowJs": true
+    "allowJs": true,
+    "noEmit": true
   },
   "include": ["./src/**/*"]
 }
