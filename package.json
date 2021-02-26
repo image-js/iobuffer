@@ -40,11 +40,6 @@
     "preset": "ts-jest",
     "testEnvironment": "node"
   },
-  "cheminfo": {
-    "docs": {
-      "tsEntry": "src/IOBuffer.ts"
-    }
-  },
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.31",
