@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>iobuffer</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for iobuffer">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -13,7 +13,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> iobuffer</h1>
+			<h1>iobuffer</h1>
 		</div>
 	</div>
 </header>
@@ -67,15 +67,16 @@
 				<a href="#iobuffer" id="iobuffer" style="color: inherit; text-decoration: none;">
 					<h1>iobuffer</h1>
 				</a>
-				<p><a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/v/iobuffer.svg?style=flat-square" alt="NPM version"></a>
-					<a href="https://travis-ci.org/image-js/iobuffer"><img src="https://img.shields.io/travis/image-js/iobuffer/master.svg?style=flat-square" alt="build status"></a>
-					<a href="https://codecov.io/gh/image-js/iobuffer"><img src="https://img.shields.io/codecov/c/github/image-js/iobuffer.svg?style=flat-square" alt="Test coverage"></a>
-				<a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/dm/iobuffer.svg?style=flat-square" alt="npm download"></a></p>
+				<p><a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/v/iobuffer.svg" alt="NPM version"></a>
+					<a href="https://github.com/image-js/iobuffer/actions?query=workflow%3A%22Node.js+CI%22"><img src="https://github.com/image-js/iobuffer/workflows/Node.js%20CI/badge.svg?branch=master" alt="build status"></a>
+					<a href="https://codecov.io/gh/image-js/iobuffer"><img src="https://img.shields.io/codecov/c/github/image-js/iobuffer.svg" alt="Test coverage"></a>
+				<a href="https://www.npmjs.com/package/iobuffer"><img src="https://img.shields.io/npm/dm/iobuffer.svg" alt="npm download"></a></p>
 				<p>Read and write binary data in ArrayBuffers.</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
-				<pre><code class="language-console">npm install iobuffer</code></pre>
+				<pre><code class="language-console">npm i iobuffer
+</code></pre>
 				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
 					<h2>API</h2>
 				</a>
@@ -83,11 +84,11 @@
 				<a href="#usage-example" id="usage-example" style="color: inherit; text-decoration: none;">
 					<h2>Usage example</h2>
 				</a>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> { IOBuffer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'iobuffer'</span>);
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { IOBuffer } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;iobuffer&#x27;</span>);
 
 <span class="hljs-keyword">const</span> io = <span class="hljs-keyword">new</span> IOBuffer();
 <span class="hljs-comment">// Pointer offset is 0</span>
-io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-comment">// Write 11 chars, pointer offset now 11 (-&gt;15)</span>
+io.writeChars(<span class="hljs-string">&#x27;Hello world&#x27;</span>) <span class="hljs-comment">// Write 11 chars, pointer offset now 11</span>
   .writeUint32(<span class="hljs-number">42</span>) <span class="hljs-comment">// Write 32-bit int (default is little-endian), pointer offset now 15</span>
   .setBigEndian() <span class="hljs-comment">// Switch to big-endian mode</span>
   .writeUint32(<span class="hljs-number">24</span>) <span class="hljs-comment">// Write another 32-bit int, but big-endian, pointer offset now 19</span>
@@ -98,7 +99,8 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
   .setLittleEndian() <span class="hljs-comment">// Go back to little endian mode</span>
   .writeUint16(<span class="hljs-number">18</span>) <span class="hljs-comment">// Write 16-bit unsigned integer in the previously skipped 2 bytes, pointer offset now 21</span>
   .rewind() <span class="hljs-comment">// Pointer offset back to 0</span>
-  .toArray(); <span class="hljs-comment">// Get a Uint8Array over the written part [0-21] of the internal ArrayBuffer</span></code></pre>
+  .toArray(); <span class="hljs-comment">// Get a Uint8Array over the written part [0-21] of the internal ArrayBuffer</span>
+</code></pre>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>
 				</a>
@@ -114,14 +116,14 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
 					<li class="label tsd-is-external">
 						<span>Internals</span>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_iobuffer_.html">"IOBuffer"</a>
+					<li class=" tsd-kind-module">
+						<a href="modules/_iobuffer_.html">&quot;IOBuffer&quot;</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
-					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_utf8_.html">"utf8"</a>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="modules/_utf8_.html">&quot;utf8&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -137,57 +139,14 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
@@ -197,6 +156,5 @@ io.writeChars(<span class="hljs-string">'Hello world'</span>) <span class="hljs-
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
