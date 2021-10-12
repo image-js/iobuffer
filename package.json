@@ -15,13 +15,15 @@
     "lib-esm"
   ],
   "scripts": {
+    "check-types": "tsc --noEmit",
     "clean": "rimraf lib lib-esm",
-    "eslint": "eslint src --ext ts",
+    "eslint": "eslint src",
     "eslint-fix": "npm run eslint -- --fix",
-    "prepublishOnly": "npm run tsc",
-    "test": "npm run test-coverage && npm run eslint",
-    "test-coverage": "npm run test-only -- --coverage",
-    "test-only": "jest",
+    "prepack": "npm run tsc",
+    "prettier": "prettier --check src",
+    "prettier-write": "prettier --write src",
+    "test": "npm run test-only && npm run eslint && npm run prettier && npm run check-types",
+    "test-only": "jest --coverage",
     "tsc": "npm run clean && npm run tsc-cjs && npm run tsc-esm",
     "tsc-cjs": "tsc --project tsconfig.cjs.json",
     "tsc-esm": "tsc --project tsconfig.esm.json"
@@ -36,26 +38,15 @@
     "url": "https://github.com/image-js/iobuffer/issues"
   },
   "homepage": "https://github.com/image-js/iobuffer#readme",
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  },
   "devDependencies": {
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.31",
-    "eslint": "^7.20.0",
-    "eslint-config-cheminfo-typescript": "^8.0.8",
-    "jest": "^26.6.3",
-    "prettier": "^2.2.1",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.10.3",
+    "eslint": "^7.32.0",
+    "eslint-config-cheminfo-typescript": "^9.0.0",
+    "jest": "^27.2.5",
+    "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
-    "ts-jest": "^26.5.2",
-    "typescript": "^4.2.2"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "semi": true,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.3"
   }
 }
