@@ -1,5 +1,12 @@
 # Changelog
 
+### [5.0.4](https://www.github.com/image-js/iobuffer/compare/v5.0.3...v5.0.4) (2021-10-12)
+
+
+### Bug Fixes
+
+* set TypeScript target to ES2020 ([4f4b412](https://www.github.com/image-js/iobuffer/commit/4f4b4120b90d0fcd67e6c36f9bd81ea7cbcd8c3d))
+
 ### [5.0.3](https://github.com/image-js/iobuffer/compare/v5.0.2...v5.0.3) (2021-02-26)
 
 
@@ -156,6 +163,3 @@
 
 <a name="1.0.0"></a>
 # 1.0.0 (2015-09-23)
-
-
-
