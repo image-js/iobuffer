@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://www.github.com/image-js/iobuffer/compare/v5.0.4...v5.1.0) (2021-12-17)
+
+
+### Features
+
+* add int64 support ([3a306c0](https://www.github.com/image-js/iobuffer/commit/3a306c0d3fb62f88be7ad59ea1d202a623907426))
+
 ### [5.0.4](https://www.github.com/image-js/iobuffer/compare/v5.0.3...v5.0.4) (2021-10-12)
 
 
