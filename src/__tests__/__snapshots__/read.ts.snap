@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`read data readBigInt64 1`] = `71777218556133120n`;
+
+exports[`read data readBigUint64 1`] = `71777218556133120n`;
+
 exports[`read data readFloat32 1`] = `-1.714652191593956e+38`;
 
 exports[`read data readFloat32 2`] = `2.3418408851396162e-38`;

@@ -314,6 +314,24 @@ export class IOBuffer {
   }
 
   /**
+   * Read a 64-bit signed integer number and move pointer forward by 8 bytes.
+   */
+  public readBigInt64(): bigint {
+    const value = this._data.getBigInt64(this.offset, this.littleEndian);
+    this.offset += 8;
+    return value;
+  }
+
+  /**
+   * Read a 64-bit unsigned integer number and move pointer forward by 8 bytes.
+   */
+  public readBigUint64(): bigint {
+    const value = this._data.getBigUint64(this.offset, this.littleEndian);
+    this.offset += 8;
+    return value;
+  }
+
+  /**
    * Read a 1-byte ASCII character and move pointer forward by 1 byte.
    */
   public readChar(): string {
@@ -456,6 +474,30 @@ export class IOBuffer {
   public writeFloat64(value: number): this {
     this.ensureAvailable(8);
     this._data.setFloat64(this.offset, value, this.littleEndian);
+    this.offset += 8;
+    this._updateLastWrittenByte();
+    return this;
+  }
+
+  /**
+   * Write `value` as a 64-bit signed bigint and move pointer forward by 8
+   * bytes.
+   */
+  public writeBigInt64(value: bigint): this {
+    this.ensureAvailable(8);
+    this._data.setBigInt64(this.offset, value, this.littleEndian);
+    this.offset += 8;
+    this._updateLastWrittenByte();
+    return this;
+  }
+
+  /**
+   * Write `value` as a 64-bit unsigned bigint and move pointer forward by 8
+   * bytes.
+   */
+  public writeBigUint64(value: bigint): this {
+    this.ensureAvailable(8);
+    this._data.setBigUint64(this.offset, value, this.littleEndian);
     this.offset += 8;
     this._updateLastWrittenByte();
     return this;
