@@ -87,6 +87,14 @@ describe('read data', () => {
     expect(buffer.readFloat64()).toMatchSnapshot();
   });
 
+  it('readBigInt64', () => {
+    expect(buffer.readBigInt64()).toMatchSnapshot();
+  });
+
+  it('readBigUint64', () => {
+    expect(buffer.readBigUint64()).toMatchSnapshot();
+  });
+
   it('readChar(s)', () => {
     const chars = 'hello'.split('').map((char) => char.charCodeAt(0));
     const theBuffer = new IOBuffer(new Uint8Array(chars));

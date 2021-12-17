@@ -85,6 +85,18 @@ describe('write data', () => {
     expect(buffer.readFloat64()).toMatchSnapshot();
   });
 
+  it('writeBigInt64', () => {
+    buffer.writeBigInt64(-1234567890n);
+    buffer.rewind();
+    expect(buffer.readBigInt64()).toMatchSnapshot();
+  });
+
+  it('writeBigUint64', () => {
+    buffer.writeBigUint64(1234567890n);
+    buffer.rewind();
+    expect(buffer.readBigInt64()).toMatchSnapshot();
+  });
+
   it('writeChar(s)', () => {
     const theBuffer = new IOBuffer(5);
     theBuffer.writeChar('h');
