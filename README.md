@@ -27,7 +27,7 @@ npm i iobuffer
 
 ## API
 
-Complete [API documentation](https://image-js.github.io/iobuffer/classes/_iobuffer_.iobuffer.html)
+Complete [API documentation](http://image-js.github.io/iobuffer/)
 
 ## Usage example
 
