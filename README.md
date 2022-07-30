@@ -56,7 +56,7 @@ io.writeChars('Hello world') // Write 11 chars, pointer offset now 11
 
 [npm-image]: https://img.shields.io/npm/v/iobuffer.svg
 [npm-url]: https://www.npmjs.com/package/iobuffer
-[ci-image]: https://github.com/image-js/iobuffer/workflows/Node.js%20CI/badge.svg?branch=master
+[ci-image]: https://github.com/image-js/iobuffer/workflows/Node.js%20CI/badge.svg?branch=main
 [ci-url]: https://github.com/image-js/iobuffer/actions?query=workflow%3A%22Node.js+CI%22
 [codecov-image]: https://img.shields.io/codecov/c/github/image-js/iobuffer.svg
 [codecov-url]: https://codecov.io/gh/image-js/iobuffer
