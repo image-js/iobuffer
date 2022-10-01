@@ -45,6 +45,17 @@ describe('core methods', () => {
     expect(buffer.offset).toBe(8);
   });
 
+  it('back', () => {
+    buffer.offset = 8;
+    buffer.back(5);
+    expect(buffer.offset).toBe(3);
+    buffer.back(1);
+    buffer.back();
+    expect(buffer.offset).toBe(1);
+    buffer.back();
+    expect(buffer.offset).toBe(0);
+  });
+
   it('seek', () => {
     buffer.seek(0);
     expect(buffer.offset).toBe(0);
