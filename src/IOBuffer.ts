@@ -142,6 +142,15 @@ export class IOBuffer {
   }
 
   /**
+   * Move the pointer n bytes backward.
+   * @param n - Number of bytes to move back.
+   */
+  public back(n = 1): this {
+    this.offset -= n;
+    return this;
+  }
+
+  /**
    * Move the pointer to the given offset.
    * @param offset
    */
