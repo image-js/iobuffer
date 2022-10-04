@@ -114,4 +114,21 @@ describe('read data', () => {
     theBuffer.seek(1);
     expect(theBuffer.readUtf8()).toBe('4');
   });
+
+  it('decodeText', () => {
+    const theBuffer = new IOBuffer(
+      Buffer.from([
+        42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42, 0x72, 0x75, 0x6e, 0x21, 0xcf,
+        0x79, 0x6f, 0x73, 0x65, 0x6d, 0x69, 0x74, 0x65,
+      ]),
+    );
+    expect(theBuffer.readByte()).toBe(42);
+    const strE1 = theBuffer.decodeText(5);
+    expect(strE1).toBe('42€');
+    expect(theBuffer.readByte()).toBe(42);
+    const strE2 = theBuffer.decodeText(4, 'windows-1251');
+    expect(strE2).toBe('run!');
+    expect(theBuffer.decodeText(1, 'windows-1251')).toBe('П');
+    expect(theBuffer.decodeText(8, 'ISO-8859-2')).toBe('yosemite');
+  });
 });

@@ -1,4 +1,4 @@
-import { decode, encode } from './utf8';
+import { decode, encode } from './text';
 
 const defaultByteLength = 1024 * 8;
 
@@ -364,6 +364,15 @@ export class IOBuffer {
    */
   public readUtf8(n = 1): string {
     return decode(this.readBytes(n));
+  }
+
+  /**
+   * Read the next `n` bytes, return a string decoded with `encoding` and move pointer
+   * forward by `n` bytes.
+   * If no encoding is passed, the function is equivalent to @see {@link IOBuffer#readUtf8}
+   */
+  public decodeText(n = 1, encoding = 'utf-8'): string {
+    return decode(this.readBytes(n), encoding);
   }
 
   /**

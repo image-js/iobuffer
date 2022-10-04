@@ -1,9 +1,8 @@
 // eslint-disable-next-line import/no-unassigned-import
 import './text-encoding-polyfill';
 
-const decoder = new TextDecoder('utf-8');
-
-export function decode(bytes: Uint8Array): string {
+export function decode(bytes: Uint8Array, encoding = 'utf8'): string {
+  const decoder = new TextDecoder(encoding);
   return decoder.decode(bytes);
 }
 
