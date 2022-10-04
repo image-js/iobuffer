@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.2.0](https://www.github.com/image-js/iobuffer/compare/v5.1.0...v5.2.0) (2022-10-04)
+
+
+### Features
+
+* add IOBuffer.back() ([#52](https://www.github.com/image-js/iobuffer/issues/52)) ([49a2df9](https://www.github.com/image-js/iobuffer/commit/49a2df924ac512d96d394eecb7fe24fdd2469ead))
+* decode text ([616b1a5](https://www.github.com/image-js/iobuffer/commit/616b1a5e841ceb1174a86c6eb87bcffe571aca2f))
+
 ## [5.1.0](https://www.github.com/image-js/iobuffer/compare/v5.0.4...v5.1.0) (2021-12-17)
 
 
