@@ -1,5 +1,12 @@
 # Changelog
 
+### [5.2.1](https://www.github.com/image-js/iobuffer/compare/v5.2.0...v5.2.1) (2022-10-07)
+
+
+### Bug Fixes
+
+* remap browser version of text decoder ([4531fa9](https://www.github.com/image-js/iobuffer/commit/4531fa94120f8984029dbe37574c64986f172469))
+
 ## [5.2.0](https://www.github.com/image-js/iobuffer/compare/v5.1.0...v5.2.0) (2022-10-04)
 
 
