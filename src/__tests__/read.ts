@@ -131,4 +131,16 @@ describe('read data', () => {
     expect(theBuffer.decodeText(1, 'windows-1251')).toBe('П');
     expect(theBuffer.decodeText(8, 'ISO-8859-2')).toBe('yosemite');
   });
+  it('arrayOf', () => {
+    const theBuffer = new IOBuffer(
+      Buffer.from([
+        42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42, 0x72, 0x75, 0x6e, 0x21, 0xcf,
+        0x79, 0x6f, 0x73, 0x65, 0x6d, 0x69, 0x74, 0x65,
+      ]),
+    );
+    theBuffer.arrayOf(5, 'uint8');
+    expect(theBuffer.offset).toBe(5);
+    theBuffer.arrayOf(1, 'uint32');
+    expect(theBuffer.offset).toBe(9);
+  });
 });

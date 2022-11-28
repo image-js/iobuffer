@@ -4,6 +4,16 @@ const defaultByteLength = 1024 * 8;
 
 type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer | Buffer;
 
+type Word =
+  | 'int8'
+  | 'uint8'
+  | 'int16'
+  | 'uint16'
+  | 'int32'
+  | 'uint32'
+  | 'float32'
+  | 'float64';
+
 interface IOBufferOptions {
   /**
    * Ignore the first n bytes of the ArrayBuffer.
@@ -268,6 +278,74 @@ export class IOBuffer {
     return bytes;
   }
 
+  /**
+   * Create array of size and TypedArray type
+   * @param size - Size of array
+   * @param word - TypedArray type
+   * @returns
+   */
+  private makeTypedArray(word: Word, size = 1) {
+    switch (word) {
+      case 'int8':
+        return new Int8Array(size);
+      case 'uint8':
+        return new Uint8Array(size);
+      case 'int16':
+        return new Int16Array(size);
+      case 'uint16':
+        return new Uint16Array(size);
+      case 'int32':
+        return new Int32Array(size);
+      case 'uint32':
+        return new Uint32Array(size);
+      case 'float32':
+        return new Float32Array(size);
+      case 'float64':
+        return new Float64Array(size);
+      default:
+        throw new Error('Invalid word');
+    }
+  }
+  /**
+   * Select function for reading multiple values
+   * @param word - number type
+   * @returns - reader function to use elsewhere
+   */
+  private useReader(word: Word) {
+    switch (word) {
+      case 'int8':
+        return this.readInt8.bind(this);
+      case 'uint8':
+        return this.readUint8.bind(this);
+      case 'int16':
+        return this.readInt16.bind(this);
+      case 'uint16':
+        return this.readUint16.bind(this);
+      case 'int32':
+        return this.readInt32.bind(this);
+      case 'uint32':
+        return this.readUint32.bind(this);
+      case 'float32':
+        return this.readFloat32.bind(this);
+      case 'float64':
+        return this.readFloat64.bind(this);
+      default:
+        throw new Error('Invalid word type');
+    }
+  }
+  /**
+   * Makes typed array after reading bytes
+   * @param size - number of elements to read
+   * @param word - type of elements to read
+   */
+  public arrayOf(size: number, word: Word) {
+    const createArray = this.makeTypedArray(word, size);
+    const useReader = this.useReader(word);
+    for (let i = 0; i < size; i++) {
+      createArray.set([useReader()], i);
+    }
+    return createArray;
+  }
   /**
    * Read a 16-bit signed integer and move pointer forward by 2 bytes.
    */
