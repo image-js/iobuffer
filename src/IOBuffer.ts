@@ -285,14 +285,15 @@ export class IOBuffer {
    * @param type - number type of elements to read
    */
   public readArray(size: number, type: keyof typeof typedArrays) {
-    const bytes = typedArrays[type].BYTES_PER_ELEMENT * size;
-    const bytesCopy = new Uint8Array(bytes);
     if (type === 'uint8') {
-      return this.readBytes(bytes);
+      return this.readBytes(size);
     }
-    //offset needs to be 0 for the new data view (or multiple of 4)
-    bytesCopy.set(this.readBytes(bytes));
-    const returnArray = new typedArrays[type](bytesCopy.buffer);
+    const bytes = typedArrays[type].BYTES_PER_ELEMENT * size;
+    //copy part of part of the buffer
+    const offset = this.byteOffset + this.offset;
+    const slice = this.buffer.slice(offset, offset + bytes);
+    const returnArray = new typedArrays[type](slice);
+    this.offset += bytes;
     return returnArray;
   }
   /**
