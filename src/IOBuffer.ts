@@ -4,15 +4,16 @@ const defaultByteLength = 1024 * 8;
 
 type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer | Buffer;
 
-type Word =
-  | 'int8'
-  | 'uint8'
-  | 'int16'
-  | 'uint16'
-  | 'int32'
-  | 'uint32'
-  | 'float32'
-  | 'float64';
+const typedArrays = {
+  int8: Int8Array,
+  uint8: Uint8Array,
+  int16: Int16Array,
+  uint16: Uint16Array,
+  int32: Int32Array,
+  uint32: Uint32Array,
+  float32: Float32Array,
+  float64: Float64Array,
+};
 
 interface IOBufferOptions {
   /**
@@ -279,72 +280,20 @@ export class IOBuffer {
   }
 
   /**
-   * Create array of size and TypedArray type
-   * @param size - Size of array
-   * @param word - TypedArray type
-   * @returns
-   */
-  private makeTypedArray(word: Word, size = 1) {
-    switch (word) {
-      case 'int8':
-        return new Int8Array(size);
-      case 'uint8':
-        return new Uint8Array(size);
-      case 'int16':
-        return new Int16Array(size);
-      case 'uint16':
-        return new Uint16Array(size);
-      case 'int32':
-        return new Int32Array(size);
-      case 'uint32':
-        return new Uint32Array(size);
-      case 'float32':
-        return new Float32Array(size);
-      case 'float64':
-        return new Float64Array(size);
-      default:
-        throw new Error('Invalid word');
-    }
-  }
-  /**
-   * Select function for reading multiple values
-   * @param word - number type
-   * @returns - reader function to use elsewhere
-   */
-  private useReader(word: Word) {
-    switch (word) {
-      case 'int8':
-        return this.readInt8.bind(this);
-      case 'uint8':
-        return this.readUint8.bind(this);
-      case 'int16':
-        return this.readInt16.bind(this);
-      case 'uint16':
-        return this.readUint16.bind(this);
-      case 'int32':
-        return this.readInt32.bind(this);
-      case 'uint32':
-        return this.readUint32.bind(this);
-      case 'float32':
-        return this.readFloat32.bind(this);
-      case 'float64':
-        return this.readFloat64.bind(this);
-      default:
-        throw new Error('Invalid word type');
-    }
-  }
-  /**
    * Makes typed array after reading bytes
-   * @param size - number of elements to read
-   * @param word - type of elements to read
+   * @param size - size of the resulting array
+   * @param type - number type of elements to read
    */
-  public arrayOf(size: number, word: Word) {
-    const createArray = this.makeTypedArray(word, size);
-    const useReader = this.useReader(word);
-    for (let i = 0; i < size; i++) {
-      createArray.set([useReader()], i);
+  public readArray(size: number, type: keyof typeof typedArrays) {
+    const bytes = typedArrays[type].BYTES_PER_ELEMENT * size;
+    const bytesCopy = new Uint8Array(bytes);
+    if (type === 'uint8') {
+      return this.readBytes(bytes);
     }
-    return createArray;
+    //offset needs to be 0 for the new data view (or multiple of 4)
+    bytesCopy.set(this.readBytes(bytes));
+    const returnArray = new typedArrays[type](bytesCopy.buffer);
+    return returnArray;
   }
   /**
    * Read a 16-bit signed integer and move pointer forward by 2 bytes.
