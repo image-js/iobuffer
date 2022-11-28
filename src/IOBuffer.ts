@@ -285,12 +285,9 @@ export class IOBuffer {
    * @param type - number type of elements to read
    */
   public readArray(size: number, type: keyof typeof typedArrays) {
-    if (type === 'uint8') {
-      return this.readBytes(size);
-    }
     const bytes = typedArrays[type].BYTES_PER_ELEMENT * size;
-    //copy part of part of the buffer
     const offset = this.byteOffset + this.offset;
+    //copy part of part of the buffer
     const slice = this.buffer.slice(offset, offset + bytes);
     const returnArray = new typedArrays[type](slice);
     this.offset += bytes;
