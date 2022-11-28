@@ -133,21 +133,15 @@ describe('read data', () => {
   });
   it('readArray', () => {
     const theBuffer = new IOBuffer(
-      Buffer.from([
-        42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42, 0x72, 0x75, 0x6e, 0x21, 0xcf,
-        0x79, 0x6f, 0x73, 0x65, 0x6d, 0x69, 0x74, 0x65,
-      ]),
+      Buffer.from([42, 34, 32, 82, 42, 72, 75, 21, 79, 73, 65, 69, 74, 65]),
     );
     const u8Array = theBuffer.readArray(5, 'uint8');
     expect(theBuffer.offset).toBe(5);
-    expect(u8Array).toStrictEqual(new Uint8Array([42, 52, 50, 226, 130]));
+    expect(u8Array).toStrictEqual(new Uint8Array([42, 34, 32, 82, 42]));
     const u32Array = theBuffer.readArray(1, 'uint32');
     expect(theBuffer.offset).toBe(9);
     expect(u32Array).toStrictEqual(
-      new Uint32Array(new Uint8Array([0xac, 42, 0x72, 0x75]).buffer),
-    );
-    expect(u32Array[0]).toBe(
-      0x75 * 256 * 256 * 256 + 0x72 * 256 * 256 + 42 * 256 + 0xac,
+      new Uint32Array(new Uint8Array([72, 75, 21, 79]).buffer),
     );
   });
 });
