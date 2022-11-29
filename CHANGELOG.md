@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.0](https://github.com/image-js/iobuffer/compare/v5.2.1...v5.3.0) (2022-11-29)
+
+
+### Features
+
+* add readArray method to read any typed array ([#58](https://github.com/image-js/iobuffer/issues/58)) ([eda3e91](https://github.com/image-js/iobuffer/commit/eda3e918ce93e25c9f0e82e626b48bc01c0960ee))
+
 ### [5.2.1](https://www.github.com/image-js/iobuffer/compare/v5.2.0...v5.2.1) (2022-10-07)
 
 
