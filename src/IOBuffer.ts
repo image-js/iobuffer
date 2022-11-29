@@ -11,9 +11,13 @@ const typedArrays = {
   uint16: Uint16Array,
   int32: Int32Array,
   uint32: Uint32Array,
+  uint64: BigUint64Array,
+  int64: BigInt64Array,
   float32: Float32Array,
   float64: Float64Array,
 };
+
+type TypedArrays = typeof typedArrays;
 
 interface IOBufferOptions {
   /**
@@ -272,26 +276,25 @@ export class IOBuffer {
    * Read `n` bytes and move pointer forward by `n` bytes.
    */
   public readBytes(n = 1): Uint8Array {
-    const bytes = new Uint8Array(n);
-    for (let i = 0; i < n; i++) {
-      bytes[i] = this.readByte();
-    }
-    return bytes;
+    return this.readArray(n, 'uint8');
   }
 
   /**
-   * Makes typed array after reading bytes
+   * Creates an array of corresponding to the type `type` and size `size`.
+   * For example type `uint8` will create a `Uint8Array`.
    * @param size - size of the resulting array
    * @param type - number type of elements to read
    */
-  public readArray(size: number, type: keyof typeof typedArrays) {
+  public readArray<T extends keyof typeof typedArrays>(
+    size: number,
+    type: T,
+  ): InstanceType<TypedArrays[T]> {
     const bytes = typedArrays[type].BYTES_PER_ELEMENT * size;
     const offset = this.byteOffset + this.offset;
-    //copy part of part of the buffer
     const slice = this.buffer.slice(offset, offset + bytes);
     const returnArray = new typedArrays[type](slice);
     this.offset += bytes;
-    return returnArray;
+    return returnArray as InstanceType<TypedArrays[T]>;
   }
   /**
    * Read a 16-bit signed integer and move pointer forward by 2 bytes.
