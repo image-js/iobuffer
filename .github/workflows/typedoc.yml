@@ -6,14 +6,15 @@ on:
     types: [published]
 
 env:
-  NODE_VERSION: 14.x
+  NODE_VERSION: 16.x
+  ENTRY_FILE: 'src/IOBuffer.ts'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Install dependencies
@@ -21,11 +22,11 @@ jobs:
       - name: Build documentation
         uses: zakodium/typedoc-action@v2
         with:
-          entry: 'src/IOBuffer.ts'
+          entry: ${{ env.ENTRY_FILE }}
       - name: Deploy to GitHub pages
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: docs
-          CLEAN: true
+          token: ${{ secrets.BOT_TOKEN }}
+          branch: gh-pages
+          folder: docs
+          clean: true
