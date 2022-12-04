@@ -73,7 +73,7 @@ describe('readArray', () => {
     expect(BeRes[0]).toBe(firstNumber);
     expect(BeRes[1]).toBe(secondNumber);
   });
-  it('int 64', () => {
+  it('uint 64', () => {
     const dataFromLE = new Uint8Array([
       1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
     ]);
@@ -97,5 +97,26 @@ describe('readArray', () => {
     expect(buffer.offset).toBe(16);
     expect(BeRes[0]).toBe(firstNumber);
     expect(BeRes[1]).toBe(secondNumber);
+  });
+  it('float 32', () => {
+    const data = new Uint8Array([0, 2, 0, 1, 0, 0, 0, 0]);
+    //numbers taken from readFloat32BE and LE in Node.js
+    const le = 2.351132194607322e-38;
+    const be = 1.8367239361444675e-40;
+
+    // little endian
+    let buffer = new IOBuffer(data);
+    const res = buffer.readArray(2, 'float32');
+    expect(buffer.offset).toBe(8);
+    expect(res[0]).toBe(le);
+    expect(res[1]).toBe(0);
+
+    // big endian
+    buffer.offset = 0;
+    buffer.setBigEndian();
+    const resBE = buffer.readArray(2, 'float32');
+    expect(buffer.offset).toBe(8);
+    expect(resBE[0]).toBe(be);
+    expect(resBE[1]).toBe(0);
   });
 });
