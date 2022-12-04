@@ -80,17 +80,22 @@ describe('readArray', () => {
     const dataFromBE = new Uint8Array([
       0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2,
     ]);
+    const firstNumber = 1n;
+    const secondNumber = 2n;
 
     // little endian
     let buffer = new IOBuffer(dataFromLE);
     const LeRes = buffer.readArray(2, 'uint64');
     expect(buffer.offset).toBe(16);
+    expect(LeRes[0]).toBe(firstNumber);
+    expect(LeRes[1]).toBe(secondNumber);
 
     // big endian
     buffer = new IOBuffer(dataFromBE);
     buffer.setBigEndian();
     const BeRes = buffer.readArray(2, 'uint64');
     expect(buffer.offset).toBe(16);
-    expect(BeRes).toStrictEqual(LeRes);
+    expect(BeRes[0]).toBe(firstNumber);
+    expect(BeRes[1]).toBe(secondNumber);
   });
 });
