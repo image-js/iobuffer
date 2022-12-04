@@ -132,17 +132,50 @@ describe('read data', () => {
     expect(theBuffer.decodeText(8, 'ISO-8859-2')).toBe('yosemite');
   });
 
-  it('readArray', () => {
-    const theBuffer = new IOBuffer(
-      Buffer.from([42, 34, 32, 82, 42, 72, 75, 21, 79, 73, 65, 69, 74, 65]),
-    );
-    const u8Array = theBuffer.readArray(5, 'uint8');
-    expect(theBuffer.offset).toBe(5);
-    expect(u8Array).toStrictEqual(new Uint8Array([42, 34, 32, 82, 42]));
-    const u32Array = theBuffer.readArray(1, 'uint32');
-    expect(theBuffer.offset).toBe(9);
-    expect(u32Array).toStrictEqual(
-      new Uint32Array(new Uint8Array([72, 75, 21, 79]).buffer),
-    );
+  it('readArray 0 bytes must leave buffer unchanged', () => {
+    const theBuffer = new IOBuffer(new Int8Array([1, 2]));
+    const result = theBuffer.readArray(0, 'int8');
+    expect(result).toStrictEqual(new Int8Array([]));
+    expect(theBuffer.offset).toBe(0);
+  });
+
+  it('readArray single bytes', () => {
+    const theBuffer = new IOBuffer(new Uint8Array([1, 2, 1, 3]));
+    theBuffer.setLittleEndian();
+    theBuffer.readArray(0, 'int8');
+    const sameLE = theBuffer.readArray(4, 'uint8');
+    expect(theBuffer.offset).toBe(4);
+
+    theBuffer.setBigEndian();
+    theBuffer.offset = 0;
+    const sameBE = theBuffer.readArray(4, 'uint8');
+    expect(theBuffer.offset).toBe(4);
+    expect(sameLE).toStrictEqual(sameBE);
+  });
+
+  it('readArray compare endianness', () => {
+    /*
+  LE system stores [258, 259] as [2, 1, 3, 1]
+  BE system as [1, 2, 1, 3]
+  */
+    const dataFromLE = new Uint8Array([2, 1, 3, 1]);
+    const dataFromBE = new Uint8Array([1, 2, 1, 3]);
+    const firstNumber = 258;
+    const secondNumber = 259;
+
+    // little endian
+    let theBuffer = new IOBuffer(dataFromLE);
+    const LeRes = theBuffer.readArray(2, 'uint16');
+    expect(theBuffer.offset).toBe(4);
+    expect(firstNumber).toBe(LeRes[0]);
+    expect(secondNumber).toBe(LeRes[1]);
+
+    //big endian
+    theBuffer = new IOBuffer(dataFromBE);
+    theBuffer.setBigEndian();
+    const BeRes = theBuffer.readArray(2, 'uint16');
+    expect(theBuffer.offset).toBe(4);
+    expect(firstNumber).toBe(BeRes[0]);
+    expect(secondNumber).toBe(BeRes[1]);
   });
 });

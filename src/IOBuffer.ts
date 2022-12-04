@@ -54,6 +54,7 @@ export class IOBuffer {
 
   private lastWrittenByte: number;
   private littleEndian: boolean;
+  private hostBigEndian: boolean;
 
   private _data: DataView;
   private _mark: number;
@@ -78,6 +79,12 @@ export class IOBuffer {
       dataIsGiven = true;
       this.lastWrittenByte = data.byteLength;
     }
+
+    this.hostBigEndian = (() => {
+      const array = new Uint8Array(4);
+      const view = new Uint32Array(array.buffer);
+      return !((view[0] = 1) & array[0]);
+    })();
 
     const offset = options.offset ? options.offset >>> 0 : 0;
     const byteLength = data.byteLength - offset;
@@ -292,6 +299,18 @@ export class IOBuffer {
     const bytes = typedArrays[type].BYTES_PER_ELEMENT * size;
     const offset = this.byteOffset + this.offset;
     const slice = this.buffer.slice(offset, offset + bytes);
+    if (
+      this.littleEndian === this.hostBigEndian &&
+      type !== 'uint8' &&
+      type !== 'int8'
+    ) {
+      const slice = new Uint8Array(this.buffer.slice(offset, offset + bytes));
+      slice.reverse();
+      const returnArray = new typedArrays[type](slice.buffer);
+      this.offset += bytes;
+      returnArray.reverse();
+      return returnArray as InstanceType<TypedArrays[T]>;
+    }
     const returnArray = new typedArrays[type](slice);
     this.offset += bytes;
     return returnArray as InstanceType<TypedArrays[T]>;
