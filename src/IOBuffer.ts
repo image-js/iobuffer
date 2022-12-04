@@ -2,6 +2,12 @@ import { decode, encode } from './text';
 
 const defaultByteLength = 1024 * 8;
 
+const hostBigEndian = (() => {
+  const array = new Uint8Array(4);
+  const view = new Uint32Array(array.buffer);
+  return !((view[0] = 1) & array[0]);
+})();
+
 type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer | Buffer;
 
 const typedArrays = {
@@ -54,7 +60,6 @@ export class IOBuffer {
 
   private lastWrittenByte: number;
   private littleEndian: boolean;
-  private hostBigEndian: boolean;
 
   private _data: DataView;
   private _mark: number;
@@ -79,13 +84,6 @@ export class IOBuffer {
       dataIsGiven = true;
       this.lastWrittenByte = data.byteLength;
     }
-
-    this.hostBigEndian = (() => {
-      const array = new Uint8Array(4);
-      const view = new Uint32Array(array.buffer);
-      return !((view[0] = 1) & array[0]);
-    })();
-
     const offset = options.offset ? options.offset >>> 0 : 0;
     const byteLength = data.byteLength - offset;
     let dvOffset = offset;
@@ -300,7 +298,7 @@ export class IOBuffer {
     const offset = this.byteOffset + this.offset;
     const slice = this.buffer.slice(offset, offset + bytes);
     if (
-      this.littleEndian === this.hostBigEndian &&
+      this.littleEndian === hostBigEndian &&
       type !== 'uint8' &&
       type !== 'int8'
     ) {
