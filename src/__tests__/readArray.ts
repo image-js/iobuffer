@@ -26,7 +26,7 @@ describe('readArray', () => {
     expect(sameLE).toStrictEqual(sameBE);
   });
 
-  it('int 16', () => {
+  it('uint 16', () => {
     /*
     LE system stores [258, 259] as [2, 1, 3, 1]
     BE system as [1, 2, 1, 3]
