@@ -167,15 +167,15 @@ describe('read data', () => {
     let theBuffer = new IOBuffer(dataFromLE);
     const LeRes = theBuffer.readArray(2, 'uint16');
     expect(theBuffer.offset).toBe(4);
-    expect(firstNumber).toBe(LeRes[0]);
-    expect(secondNumber).toBe(LeRes[1]);
+    expect(LeRes[0]).toBe(firstNumber);
+    expect(LeRes[1]).toBe(secondNumber);
 
     //big endian
     theBuffer = new IOBuffer(dataFromBE);
     theBuffer.setBigEndian();
     const BeRes = theBuffer.readArray(2, 'uint16');
     expect(theBuffer.offset).toBe(4);
-    expect(firstNumber).toBe(BeRes[0]);
-    expect(secondNumber).toBe(BeRes[1]);
+    expect(BeRes[0]).toBe(firstNumber);
+    expect(BeRes[1]).toBe(secondNumber);
   });
 });
