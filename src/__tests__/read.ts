@@ -131,18 +131,4 @@ describe('read data', () => {
     expect(theBuffer.decodeText(1, 'windows-1251')).toBe('П');
     expect(theBuffer.decodeText(8, 'ISO-8859-2')).toBe('yosemite');
   });
-
-  it('readArray', () => {
-    const theBuffer = new IOBuffer(
-      Buffer.from([42, 34, 32, 82, 42, 72, 75, 21, 79, 73, 65, 69, 74, 65]),
-    );
-    const u8Array = theBuffer.readArray(5, 'uint8');
-    expect(theBuffer.offset).toBe(5);
-    expect(u8Array).toStrictEqual(new Uint8Array([42, 34, 32, 82, 42]));
-    const u32Array = theBuffer.readArray(1, 'uint32');
-    expect(theBuffer.offset).toBe(9);
-    expect(u32Array).toStrictEqual(
-      new Uint32Array(new Uint8Array([72, 75, 21, 79]).buffer),
-    );
-  });
 });
