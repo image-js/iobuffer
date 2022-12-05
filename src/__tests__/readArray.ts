@@ -101,6 +101,7 @@ describe('readArray', () => {
     expect(BeRes[1]).toBe(secondNumber);
   });
   it('float 32', () => {
+    //numbers taken from Buffer.readFloatLE in Node.js
     const dataFromLE = new Uint8Array([1, 5, 3, 31, 3, 4, 40, 8]);
     const dataFromBE = new Uint8Array([31, 3, 5, 1, 8, 40, 4, 3]);
 
@@ -124,7 +125,7 @@ describe('readArray', () => {
     expect(resBE[1]).toBe(secondNumber);
   });
   it('float 64', () => {
-    //numbers taken from Buffer.readDoubleBE and LE in Node.js
+    //numbers taken from Buffer.readDoubleLE in Node.js
     const dataFromLE = new Uint8Array([
       1, 5, 3, 31, 3, 4, 40, 8, 1, 5, 3, 31, 6, 4, 45, 9,
     ]);
