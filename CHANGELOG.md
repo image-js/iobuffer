@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.3.2](https://github.com/image-js/iobuffer/compare/v5.3.1...v5.3.2) (2023-01-30)
+
+
+### Bug Fixes
+
+* do not crash on initialization if bigint arrays don't exist ([#66](https://github.com/image-js/iobuffer/issues/66)) ([098c845](https://github.com/image-js/iobuffer/commit/098c8458f73f2f43a3a5499ed4a0c45ba41ca7d4))
+
 ## [5.3.1](https://github.com/image-js/iobuffer/compare/v5.3.0...v5.3.1) (2022-12-05)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "iobuffer",
-  "version": "5.3.1",
+  "version": "5.3.2",
   "description": "Read and write binary data on ArrayBuffers",
   "main": "./lib/IOBuffer.js",
   "module": "./lib-esm/IOBuffer.js",
