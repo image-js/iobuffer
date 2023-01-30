@@ -11,16 +11,16 @@ const hostBigEndian = (() => {
 type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer | Buffer;
 
 const typedArrays = {
-  int8: Int8Array,
-  uint8: Uint8Array,
-  int16: Int16Array,
-  uint16: Uint16Array,
-  int32: Int32Array,
-  uint32: Uint32Array,
-  uint64: BigUint64Array,
-  int64: BigInt64Array,
-  float32: Float32Array,
-  float64: Float64Array,
+  int8: globalThis.Int8Array,
+  uint8: globalThis.Uint8Array,
+  int16: globalThis.Int16Array,
+  uint16: globalThis.Uint16Array,
+  int32: globalThis.Int32Array,
+  uint32: globalThis.Uint32Array,
+  uint64: globalThis.BigUint64Array,
+  int64: globalThis.BigInt64Array,
+  float32: globalThis.Float32Array,
+  float64: globalThis.Float64Array,
 };
 
 type TypedArrays = typeof typedArrays;
