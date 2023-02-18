@@ -1,5 +1,3 @@
-/* eslint jest/expect-expect: ["error", { "assertFunctionNames": ["expect", "check"] }] */
-
 import { IOBuffer } from '../IOBuffer';
 
 describe('write data', () => {
@@ -9,8 +7,7 @@ describe('write data', () => {
   });
 
   it('writeBoolean', () => {
-    // @ts-ignore
-    buffer.writeBoolean();
+    buffer.writeBoolean(null);
     buffer.writeBoolean(true);
     buffer.writeBoolean(false);
     buffer.writeBoolean(1);
