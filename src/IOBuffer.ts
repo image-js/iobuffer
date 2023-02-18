@@ -242,7 +242,8 @@ export class IOBuffer {
       const newArray = new Uint8Array(newLength);
       newArray.set(new Uint8Array(this.buffer));
       this.buffer = newArray.buffer;
-      this.length = this.byteLength = newLength;
+      this.length = newLength;
+      this.byteLength = newLength;
       this._data = new DataView(this.buffer);
     }
     return this;
