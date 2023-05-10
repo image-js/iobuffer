@@ -297,7 +297,6 @@ export class IOBuffer {
   ): InstanceType<TypedArrays[T]> {
     const bytes = typedArrays[type].BYTES_PER_ELEMENT * size;
     const offset = this.byteOffset + this.offset;
-    const slice = this.buffer.slice(offset, offset + bytes);
     if (
       this.littleEndian === hostBigEndian &&
       type !== 'uint8' &&
@@ -310,7 +309,18 @@ export class IOBuffer {
       returnArray.reverse();
       return returnArray as InstanceType<TypedArrays[T]>;
     }
-    const returnArray = new typedArrays[type](slice);
+
+    let returnArray = null;
+    if (
+      typedArrays[type].BYTES_PER_ELEMENT === 1 ||
+      offset % typedArrays[type].BYTES_PER_ELEMENT === 0
+    ) {
+      returnArray = new typedArrays[type](this.buffer, offset, size);
+    } else {
+      const slice = this.buffer.slice(offset, offset + bytes);
+      returnArray = new typedArrays[type](slice);
+    }
+
     this.offset += bytes;
     return returnArray as InstanceType<TypedArrays[T]>;
   }
