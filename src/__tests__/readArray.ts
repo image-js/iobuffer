@@ -151,4 +151,21 @@ describe('readArray', () => {
     expect(resBE[0]).toBe(firstNumber);
     expect(resBE[1]).toBe(secondNumber);
   });
+  it('offset not multiple', () => {
+    const buffer = new IOBuffer(new Uint8Array([1, 2, 3, 4, 5, 6]));
+
+    //offset is multiple
+    buffer.offset = 2;
+    const res = buffer.readArray(2, 'int16');
+    expect(buffer.offset).toBe(6);
+    expect(res[0]).toBe(3 + (4 << 8));
+    expect(res[1]).toBe(5 + (6 << 8));
+
+    //offset is not multiple and make sure that we don't have such error `start offset of Int16Array should be a multiple of 2`
+    buffer.offset = 1;
+    const resNotMultipleOffset = buffer.readArray(2, 'int16');
+    expect(buffer.offset).toBe(5);
+    expect(resNotMultipleOffset[0]).toBe(2 + (3 << 8));
+    expect(resNotMultipleOffset[1]).toBe(4 + (5 << 8));
+  });
 });
