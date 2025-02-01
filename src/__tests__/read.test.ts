@@ -1,3 +1,5 @@
+import { beforeEach, describe, expect, it } from 'vitest';
+
 import { IOBuffer } from '../IOBuffer';
 
 describe('read data', () => {
@@ -96,7 +98,9 @@ describe('read data', () => {
   });
 
   it('readChar(s)', () => {
-    const chars = 'hello'.split('').map((char) => char.charCodeAt(0));
+    const chars = 'hello'
+      .split('')
+      .map((char) => char.codePointAt(0) as number);
     const theBuffer = new IOBuffer(new Uint8Array(chars));
     expect(theBuffer.readChar()).toBe('h');
     expect(theBuffer.readChars()).toBe('e');
