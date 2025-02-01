@@ -1,4 +1,4 @@
-import { isHostBigEndian } from './env';
+import { increaseBufferSize, isHostBigEndian } from './env';
 import { decode, encode } from './text';
 
 const defaultByteLength = 1024 * 8;
@@ -246,13 +246,11 @@ export class IOBuffer {
   public ensureAvailable(byteLength = 1): this {
     if (!this.available(byteLength)) {
       const lengthNeeded = this.offset + byteLength;
-      const newLength = lengthNeeded * 2;
-      const newArray = new Uint8Array(newLength);
-      newArray.set(new Uint8Array(this.buffer));
-      this.buffer = newArray.buffer;
-      this.length = newLength;
-      this.byteLength = newLength;
-      this._data = new DataView(this.buffer);
+      const newBuffer = increaseBufferSize(this.buffer, lengthNeeded);
+      this.buffer = newBuffer;
+      this.length = newBuffer.byteLength;
+      this.byteLength = newBuffer.byteLength;
+      this._data = new DataView(newBuffer);
     }
     return this;
   }
