@@ -1,12 +1,7 @@
+import { isHostBigEndian } from './env';
 import { decode, encode } from './text';
 
 const defaultByteLength = 1024 * 8;
-
-const hostBigEndian = (() => {
-  const array = new Uint8Array(4);
-  const view = new Uint32Array(array.buffer);
-  return !((view[0] = 1) & array[0]);
-})();
 
 type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer | Buffer;
 
@@ -21,7 +16,7 @@ const typedArrays = {
   int64: globalThis.BigInt64Array,
   float32: globalThis.Float32Array,
   float64: globalThis.Float64Array,
-};
+} as const;
 
 type TypedArrays = typeof typedArrays;
 
@@ -319,7 +314,7 @@ export class IOBuffer {
     const offset = this.byteOffset + this.offset;
     const slice = this.buffer.slice(offset, offset + bytes);
     if (
-      this.littleEndian === hostBigEndian &&
+      this.littleEndian === isHostBigEndian() &&
       type !== 'uint8' &&
       type !== 'int8'
     ) {
