@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest';
+
 import { IOBuffer } from '../IOBuffer';
 
 describe('test with offset', () => {

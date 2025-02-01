@@ -1,5 +1,3 @@
-import { TextDecoder, TextEncoder } from 'util';
-
 export function decode(bytes: Uint8Array, encoding = 'utf8'): string {
   const decoder = new TextDecoder(encoding);
   return decoder.decode(bytes);
