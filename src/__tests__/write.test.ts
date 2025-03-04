@@ -135,6 +135,23 @@ describe('write data', () => {
       Uint8Array.of(42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42),
     );
   });
+
+  it('check getWrittenByteLength', () => {
+    const theBuffer = new IOBuffer();
+    theBuffer.writeByte(42);
+    theBuffer.writeUtf8('42€');
+    theBuffer.writeByte(42);
+    expect(theBuffer.getWrittenByteLength()).toEqual(7);
+  });
+
+  it('check getWrittenByteLength with offset', () => {
+    const theBuffer = new IOBuffer();
+    theBuffer.writeByte(42);
+    theBuffer.writeUtf8('42€');
+    theBuffer.writeByte(42);
+    theBuffer.byteOffset = 3;
+    expect(theBuffer.getWrittenByteLength()).toEqual(4);
+  });
 });
 
 const good = new Uint8Array(new Uint32Array([0xff00ff00, 0x00ff00ff]).buffer);
