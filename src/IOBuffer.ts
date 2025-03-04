@@ -678,7 +678,7 @@ export class IOBuffer {
   }
 
   /**
-   * Gets image's total number of bytes.
+   *  Get the total number of bytes written so far, regardless of the current offset.
    * @returns - Total number of bytes.
    */
   public getWrittenByteLength() {
