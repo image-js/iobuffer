@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.4.0](https://github.com/image-js/iobuffer/compare/v5.3.2...v5.4.0) (2025-03-04)
+
+
+### Features
+
+* add getWrittenByteLength function ([#76](https://github.com/image-js/iobuffer/issues/76)) ([093322c](https://github.com/image-js/iobuffer/commit/093322ce85fcc86e596df35b825609443bb8625c))
+
 ## [5.3.2](https://github.com/image-js/iobuffer/compare/v5.3.1...v5.3.2) (2023-01-30)
 
 
