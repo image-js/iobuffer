@@ -678,6 +678,14 @@ export class IOBuffer {
   }
 
   /**
+   * Gets image's total number of bytes.
+   * @returns - Total number of bytes.
+   */
+  public getWrittenByteLength() {
+    return this.lastWrittenByte - this.byteOffset;
+  }
+
+  /**
    * Update the last written byte offset
    * @private
    */
