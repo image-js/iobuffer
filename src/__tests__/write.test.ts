@@ -122,6 +122,9 @@ describe('write data', () => {
     theBuffer.seek(20);
     theBuffer.ensureAvailable(30);
     expect(theBuffer.byteLength).toBeGreaterThanOrEqual(50);
+    expect(() => theBuffer.ensureAvailable(Number.MAX_SAFE_INTEGER)).toThrow(
+      RangeError,
+    );
   });
 
   it('writeUtf8', () => {
