@@ -1,23 +1,20 @@
-# iobuffer
-
-Read and write binary data in ArrayBuffers.
-
 <h3 align="center">
-
   <a href="https://www.zakodium.com">
     <img src="https://www.zakodium.com/brand/zakodium-logo-white.svg" width="50" alt="Zakodium logo" />
   </a>
-
   <p>
     Maintained by <a href="https://www.zakodium.com">Zakodium</a>
   </p>
-  
-  [![NPM version][npm-image]][npm-url]
-  [![build status][ci-image]][ci-url]
-  [![Test coverage][codecov-image]][codecov-url]
-  [![npm download][download-image]][download-url]
-
 </h3>
+
+# iobuffer
+
+[![NPM version](https://img.shields.io/npm/v/iobuffer.svg)](https://www.npmjs.com/package/iobuffer)
+[![npm download](https://img.shields.io/npm/dm/iobuffer.svg)](https://www.npmjs.com/package/iobuffer)
+[![test coverage](https://img.shields.io/codecov/c/github/image-js/iobuffer.svg)](https://codecov.io/gh/image-js/iobuffer)
+[![license](https://img.shields.io/npm/l/tiff.svg)](https://github.com/image-js/tiff/blob/main/LICENSE)
+
+Read and write binary data in ArrayBuffers.
 
 ## Installation
 
@@ -53,12 +50,3 @@ io.writeChars('Hello world') // Write 11 chars, pointer offset now 11
 ## License
 
 [MIT](./LICENSE)
-
-[npm-image]: https://img.shields.io/npm/v/iobuffer.svg
-[npm-url]: https://www.npmjs.com/package/iobuffer
-[ci-image]: https://github.com/image-js/iobuffer/workflows/Node.js%20CI/badge.svg?branch=main
-[ci-url]: https://github.com/image-js/iobuffer/actions?query=workflow%3A%22Node.js+CI%22
-[codecov-image]: https://img.shields.io/codecov/c/github/image-js/iobuffer.svg
-[codecov-url]: https://codecov.io/gh/image-js/iobuffer
-[download-image]: https://img.shields.io/npm/dm/iobuffer.svg
-[download-url]: https://www.npmjs.com/package/iobuffer

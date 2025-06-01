@@ -7,7 +7,7 @@ on:
 
 env:
   NODE_VERSION: 22.x
-  ENTRY_FILE: 'src/IOBuffer.ts'
+  ENTRY_FILE: 'src/iobuffer.ts'
 
 jobs:
   deploy:

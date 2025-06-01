@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { IOBuffer } from '../IOBuffer';
+import { IOBuffer } from '../iobuffer.ts';
 
 describe('read data', () => {
   const data = new Uint32Array([0xff00ff00, 0x00ff00ff]);
