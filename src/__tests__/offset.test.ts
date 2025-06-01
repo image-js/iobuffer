@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { IOBuffer } from '../IOBuffer';
+import { IOBuffer } from '../iobuffer.ts';
 
 describe('test with offset', () => {
   it('should accept other IOBuffer with offset option', () => {

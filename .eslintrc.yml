@@ -1,3 +1,0 @@
-extends: cheminfo-typescript
-rules:
-  '@typescript-eslint/prefer-for-of': off

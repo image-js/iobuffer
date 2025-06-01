@@ -1,4 +1,4 @@
-import { decode, encode } from './text';
+import { decode, encode } from './text.ts';
 
 const defaultByteLength = 1024 * 8;
 
@@ -8,7 +8,7 @@ const hostBigEndian = (() => {
   return !((view[0] = 1) & array[0]);
 })();
 
-type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer | Buffer;
+type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer;
 
 const typedArrays = {
   int8: globalThis.Int8Array,
