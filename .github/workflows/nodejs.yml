@@ -9,6 +9,6 @@ on:
 jobs:
   nodejs:
     # Documentation: https://github.com/zakodium/workflows#nodejs-ci
-    uses: zakodium/workflows/.github/workflows/nodejs.yml@test-prepack
+    uses: zakodium/workflows/.github/workflows/nodejs.yml@nodejs-v1
     with:
       lint-check-types: true
