@@ -5,7 +5,7 @@ const defaultByteLength = 1024 * 8;
 const hostBigEndian = (() => {
   const array = new Uint8Array(4);
   const view = new Uint32Array(array.buffer);
-  return !((view[0] = 1) & array[0]);
+  return !((view[0] = 1) & (array[0] as number));
 })();
 
 type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer;
@@ -514,7 +514,7 @@ export class IOBuffer {
     this.ensureAvailable(bytes.length);
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < bytes.length; i++) {
-      this._data.setUint8(this.offset++, bytes[i]);
+      this._data.setUint8(this.offset++, bytes[i] as number);
     }
     this._updateLastWrittenByte();
     return this;

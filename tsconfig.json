@@ -1,22 +1,8 @@
 {
+  "extends": "@zakodium/tsconfig",
   "compilerOptions": {
-    "lib": ["ES2022", "WebWorker"],
-    "types": [],
-    "target": "ES2022",
-    "outDir": "lib",
-    "jsx": "react-jsx",
-    "module": "NodeNext",
-    "rewriteRelativeImportExtensions": true,
-    "strict": true,
-    "skipLibCheck": false,
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": false,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true
+    "types": ["node"],
+    "outDir": "lib"
   },
   "include": ["src"]
 }

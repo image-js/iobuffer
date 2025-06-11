@@ -13,7 +13,7 @@ describe('test toArray', () => {
     io1.writeUint32(200);
     const arr1 = io1.toArray();
     expect(arr1.byteLength).toBe(17);
-    expect(String.fromCodePoint(arr1[14])).toBe('a');
+    expect(String.fromCodePoint(arr1[14] as number)).toBe('a');
 
     const io2 = new IOBuffer(10);
     expect(io2.toArray().byteLength).toBe(0);
