@@ -8,7 +8,7 @@ const hostBigEndian = (() => {
   return !((view[0] = 1) & (array[0] as number));
 })();
 
-type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer;
+export type InputData = number | ArrayBufferLike | ArrayBufferView | IOBuffer;
 
 const typedArrays = {
   int8: globalThis.Int8Array,
@@ -25,7 +25,7 @@ const typedArrays = {
 
 type TypedArrays = typeof typedArrays;
 
-interface IOBufferOptions {
+export interface IOBufferOptions {
   /**
    * Ignore the first n bytes of the ArrayBuffer.
    */
