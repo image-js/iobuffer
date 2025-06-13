@@ -12,7 +12,7 @@
 [![NPM version](https://img.shields.io/npm/v/iobuffer.svg)](https://www.npmjs.com/package/iobuffer)
 [![npm download](https://img.shields.io/npm/dm/iobuffer.svg)](https://www.npmjs.com/package/iobuffer)
 [![test coverage](https://img.shields.io/codecov/c/github/image-js/iobuffer.svg)](https://codecov.io/gh/image-js/iobuffer)
-[![license](https://img.shields.io/npm/l/tiff.svg)](https://github.com/image-js/tiff/blob/main/LICENSE)
+[![license](https://img.shields.io/npm/l/iobuffer.svg)](https://github.com/image-js/iobuffer/blob/main/LICENSE)
 
 Read and write binary data in ArrayBuffers.
 
