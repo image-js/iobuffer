@@ -1,7 +1,9 @@
 {
   "name": "iobuffer",
   "version": "5.4.0",
+  "license": "MIT",
   "description": "Read and write binary data on ArrayBuffers",
+  "author": "Michaël Zasso",
   "type": "module",
   "exports": "./lib/iobuffer.js",
   "files": [
@@ -10,9 +12,9 @@
   ],
   "scripts": {
     "check-types": "tsc --noEmit",
-    "clean": "rimraf lib",
+    "clean": "rimraf coverage lib",
     "eslint": "eslint .",
-    "eslint-fix": "npm run eslint -- --fix",
+    "eslint-fix": "eslint . --fix",
     "prepack": "npm run tsc",
     "prettier": "prettier --check .",
     "prettier-write": "prettier --write .",
@@ -21,16 +23,6 @@
     "tsc": "npm run clean && npm run tsc-build",
     "tsc-build": "tsc --project tsconfig.build.json"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/image-js/iobuffer.git"
-  },
-  "author": "Michaël Zasso",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/image-js/iobuffer/issues"
-  },
-  "homepage": "https://github.com/image-js/iobuffer#readme",
   "devDependencies": {
     "@types/node": "^22.15.29",
     "@vitest/coverage-v8": "^3.1.4",
@@ -41,5 +33,13 @@
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
     "vitest": "^3.1.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/image-js/iobuffer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/image-js/iobuffer/issues"
+  },
+  "homepage": "https://image-js.github.io/iobuffer/"
 }
