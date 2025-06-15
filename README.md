@@ -19,14 +19,14 @@ Read and write binary data in ArrayBuffers.
 ## Installation
 
 ```console
-npm i iobuffer
+npm install iobuffer
 ```
 
 ## API
 
-Complete [API documentation](http://image-js.github.io/iobuffer/)
+### [Complete API documentation](https://image-js.github.io/iobuffer/)
 
-## Usage example
+### Usage example
 
 ```js
 const { IOBuffer } = require('iobuffer');
