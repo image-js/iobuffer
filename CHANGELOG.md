@@ -1,5 +1,21 @@
 # Changelog
 
+## [6.0.0](https://github.com/image-js/iobuffer/compare/v5.4.0...v6.0.0) (2025-06-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to ESM ([#78](https://github.com/image-js/iobuffer/issues/78))
+
+### Bug Fixes
+
+* expose types related to public APIs ([#82](https://github.com/image-js/iobuffer/issues/82)) ([b2896f5](https://github.com/image-js/iobuffer/commit/b2896f5bbe7ba12888d3e9ec0a2e29c23f7efba3))
+
+
+### Code Refactoring
+
+* migrate to ESM ([#78](https://github.com/image-js/iobuffer/issues/78)) ([a682490](https://github.com/image-js/iobuffer/commit/a68249096b6d4d5fcbcb515152f9a08c940c127a))
+
 ## [5.4.0](https://github.com/image-js/iobuffer/compare/v5.3.2...v5.4.0) (2025-03-04)
 
 
