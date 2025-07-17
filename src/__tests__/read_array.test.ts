@@ -7,6 +7,7 @@ describe('readArray', () => {
     const buffer = new IOBuffer(new Uint8Array([1, 2]));
 
     const result = buffer.readArray(0, 'int8');
+
     // return empty typed array
     expect(result).toStrictEqual(new Int8Array([]));
     // do not change offset
@@ -18,11 +19,13 @@ describe('readArray', () => {
     buffer.setLittleEndian();
     buffer.readArray(0, 'int8');
     const sameLE = buffer.readArray(4, 'uint8');
+
     expect(buffer.offset).toBe(4);
 
     buffer.setBigEndian();
     buffer.offset = 0;
     const sameBE = buffer.readArray(4, 'uint8');
+
     expect(buffer.offset).toBe(4);
 
     expect(sameLE).toStrictEqual(sameBE);
@@ -41,6 +44,7 @@ describe('readArray', () => {
     // little endian
     let buffer = new IOBuffer(dataFromLE);
     const LeRes = buffer.readArray(2, 'uint16');
+
     expect(buffer.offset).toBe(4);
     expect(LeRes[0]).toBe(firstNumber);
     expect(LeRes[1]).toBe(secondNumber);
@@ -49,6 +53,7 @@ describe('readArray', () => {
     buffer = new IOBuffer(dataFromBE);
     buffer.setBigEndian();
     const BeRes = buffer.readArray(2, 'uint16');
+
     expect(buffer.offset).toBe(4);
     expect(BeRes[0]).toBe(firstNumber);
     expect(BeRes[1]).toBe(secondNumber);
@@ -64,6 +69,7 @@ describe('readArray', () => {
     // little endian
     let buffer = new IOBuffer(dataFromLE);
     const LeRes = buffer.readArray(2, 'int32');
+
     expect(buffer.offset).toBe(8);
     expect(LeRes[0]).toBe(firstNumber);
     expect(LeRes[1]).toBe(secondNumber);
@@ -72,10 +78,12 @@ describe('readArray', () => {
     buffer = new IOBuffer(dataFromBE);
     buffer.setBigEndian();
     const BeRes = buffer.readArray(2, 'int32');
+
     expect(buffer.offset).toBe(8);
     expect(BeRes[0]).toBe(firstNumber);
     expect(BeRes[1]).toBe(secondNumber);
   });
+
   it('uint 64', () => {
     //numbers taken from Buffer.readBigUIntLE in Node.js
     const dataFromLE = new Uint8Array([
@@ -90,6 +98,7 @@ describe('readArray', () => {
     // little endian
     let buffer = new IOBuffer(dataFromLE);
     const LeRes = buffer.readArray(2, 'uint64');
+
     expect(buffer.offset).toBe(16);
     expect(LeRes[0]).toBe(firstNumber);
     expect(LeRes[1]).toBe(secondNumber);
@@ -98,10 +107,12 @@ describe('readArray', () => {
     buffer = new IOBuffer(dataFromBE);
     buffer.setBigEndian();
     const BeRes = buffer.readArray(2, 'uint64');
+
     expect(buffer.offset).toBe(16);
     expect(BeRes[0]).toBe(firstNumber);
     expect(BeRes[1]).toBe(secondNumber);
   });
+
   it('float 32', () => {
     //numbers taken from Buffer.readFloatLE in Node.js
     const dataFromLE = new Uint8Array([1, 5, 3, 31, 3, 4, 40, 8]);
@@ -113,6 +124,7 @@ describe('readArray', () => {
     // little endian
     let buffer = new IOBuffer(dataFromLE);
     const res = buffer.readArray(2, 'float32');
+
     expect(buffer.offset).toBe(8);
     expect(res[0]).toBe(firstNumber);
     expect(res[1]).toBe(secondNumber);
@@ -122,10 +134,12 @@ describe('readArray', () => {
     buffer.offset = 0;
     buffer.setBigEndian();
     const resBE = buffer.readArray(2, 'float32');
+
     expect(buffer.offset).toBe(8);
     expect(resBE[0]).toBe(firstNumber);
     expect(resBE[1]).toBe(secondNumber);
   });
+
   it('float 64', () => {
     //numbers taken from Buffer.readDoubleLE in Node.js
     const dataFromLE = new Uint8Array([
@@ -140,6 +154,7 @@ describe('readArray', () => {
     // little endian
     let buffer = new IOBuffer(dataFromLE);
     const res = buffer.readArray(2, 'float64');
+
     expect(buffer.offset).toBe(16);
     expect(res[0]).toBe(firstNumber);
     expect(res[1]).toBe(secondNumber);
@@ -149,6 +164,7 @@ describe('readArray', () => {
     buffer.offset = 0;
     buffer.setBigEndian();
     const resBE = buffer.readArray(2, 'float64');
+
     expect(buffer.offset).toBe(16);
     expect(resBE[0]).toBe(firstNumber);
     expect(resBE[1]).toBe(secondNumber);

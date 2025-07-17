@@ -5,6 +5,7 @@ import { IOBuffer } from '../iobuffer.ts';
 describe('read data', () => {
   const data = new Uint32Array([0xff00ff00, 0x00ff00ff]);
   let buffer: IOBuffer;
+
   beforeEach(() => {
     buffer = new IOBuffer(data);
   });
@@ -12,20 +13,28 @@ describe('read data', () => {
   it('construct', () => {
     // ArrayBuffer
     let theBuffer = new IOBuffer(new ArrayBuffer(4));
+
     expect(theBuffer).toHaveLength(4);
+
     // Typed array
     theBuffer = new IOBuffer(new Uint8Array(2));
+
     expect(theBuffer).toHaveLength(2);
+
     theBuffer = new IOBuffer(new Uint16Array(2));
+
     expect(theBuffer).toHaveLength(4);
+
     // Node.js buffer
     theBuffer = new IOBuffer(Buffer.alloc(5));
+
     expect(theBuffer).toHaveLength(5);
   });
 
   it('read too far', () => {
     buffer.readUint16();
     buffer.readUint32();
+
     expect(() => buffer.readUint32()).toThrow(RangeError);
   });
 
@@ -102,6 +111,7 @@ describe('read data', () => {
       .split('')
       .map((char) => char.codePointAt(0) as number);
     const theBuffer = new IOBuffer(new Uint8Array(chars));
+
     expect(theBuffer.readChar()).toBe('h');
     expect(theBuffer.readChars()).toBe('e');
     expect(theBuffer.readChars(3)).toBe('llo');
@@ -111,11 +121,16 @@ describe('read data', () => {
     const theBuffer = new IOBuffer(
       Buffer.from([42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42]),
     );
+
     expect(theBuffer.readByte()).toBe(42);
+
     const str = theBuffer.readUtf8(5);
+
     expect(str).toBe('42€');
     expect(theBuffer.readByte()).toBe(42);
+
     theBuffer.seek(1);
+
     expect(theBuffer.readUtf8()).toBe('4');
   });
 
@@ -126,11 +141,16 @@ describe('read data', () => {
         0x79, 0x6f, 0x73, 0x65, 0x6d, 0x69, 0x74, 0x65,
       ]),
     );
+
     expect(theBuffer.readByte()).toBe(42);
+
     const strE1 = theBuffer.decodeText(5);
+
     expect(strE1).toBe('42€');
     expect(theBuffer.readByte()).toBe(42);
+
     const strE2 = theBuffer.decodeText(4, 'windows-1251');
+
     expect(strE2).toBe('run!');
     expect(theBuffer.decodeText(1, 'windows-1251')).toBe('П');
     expect(theBuffer.decodeText(8, 'ISO-8859-2')).toBe('yosemite');
