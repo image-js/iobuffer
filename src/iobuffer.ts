@@ -306,7 +306,7 @@ export class IOBuffer {
 
   /**
    * Creates an array of corresponding to the type `type` and size `size`.
-   * For example type `uint8` will create a `Uint8Array`.
+   * For example, type `uint8` will create a `Uint8Array`.
    * @param size - size of the resulting array
    * @param type - number type of elements to read
    * @returns The read array.
@@ -325,12 +325,12 @@ export class IOBuffer {
     ) {
       const slice = new Uint8Array(this.buffer.slice(offset, offset + bytes));
       slice.reverse();
-      const returnArray = new typedArrays[type](slice.buffer);
+      const returnArray = new typedArrays[type](slice.buffer as ArrayBuffer);
       this.offset += bytes;
       returnArray.reverse();
       return returnArray as InstanceType<TypedArrays[T]>;
     }
-    const returnArray = new typedArrays[type](slice);
+    const returnArray = new typedArrays[type](slice as ArrayBuffer);
     this.offset += bytes;
     return returnArray as InstanceType<TypedArrays[T]>;
   }
