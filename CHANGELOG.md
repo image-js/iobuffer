@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.0.1](https://github.com/image-js/iobuffer/compare/v6.0.0...v6.0.1) (2025-08-13)
+
+
+### Bug Fixes
+
+* exports ([#87](https://github.com/image-js/iobuffer/issues/87)) ([ad0f1e0](https://github.com/image-js/iobuffer/commit/ad0f1e0d3ca16d91f338a7f2c12fa2739ad011f1))
+
 ## [6.0.0](https://github.com/image-js/iobuffer/compare/v5.4.0...v6.0.0) (2025-06-15)
 
 

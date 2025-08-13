@@ -1,6 +1,6 @@
 {
   "name": "iobuffer",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "license": "MIT",
   "description": "Read and write binary data on ArrayBuffers",
   "author": "Michaël Zasso",
