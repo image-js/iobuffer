@@ -117,6 +117,14 @@ describe('read data', () => {
     expect(theBuffer.readChars(3)).toBe('llo');
   });
 
+  it('readChar(s) above 0x7f', () => {
+    const theBuffer = new IOBuffer(
+      new Uint8Array([0x41, 0x80, 0x92, 0xb5, 0xe9, 0xff]),
+    );
+
+    expect(theBuffer.readChars(6)).toBe('A\u0080\u0092\u00B5\u00E9\u00FF');
+  });
+
   it('readUtf8', () => {
     const theBuffer = new IOBuffer(
       Buffer.from([42, 0x34, 0x32, 0xe2, 0x82, 0xac, 42]),

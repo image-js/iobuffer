@@ -416,16 +416,18 @@ export class IOBuffer {
   }
 
   /**
-   * Read a 1-byte ASCII character and move pointer forward by 1 byte.
+   * Read a single byte as the character of the same code point, which is ASCII
+   * for a byte below `0x80` and latin1 above it, and move pointer forward by 1
+   * byte.
    * @returns The read character.
    */
   public readChar(): string {
-    // eslint-disable-next-line unicorn/prefer-code-point
-    return String.fromCharCode(this.readInt8());
+    return String.fromCodePoint(this.readUint8());
   }
 
   /**
-   * Read `n` 1-byte ASCII characters and move pointer forward by `n` bytes.
+   * Read `n` bytes as the characters of the same code points and move pointer
+   * forward by `n` bytes.
    * @param n - Number of characters to read.
    * @returns The read characters.
    */
